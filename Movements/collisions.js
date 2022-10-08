@@ -1,15 +1,15 @@
 ground = [
   {
     left: 0,
-    top: 0.412 * canvasHeight,
-    height: 0.588 * canvasHeight,
+    top: 0.538 * canvasHeight,
+    height: 0.462 * canvasHeight,
     width: 0.481 * canvasWidth,
   },
   {
     left: 0.481 * canvasWidth,
-    top: 0.9 * canvasHeight,
-    height: 100,
-    width: 1000,
+    top: 0.912 * canvasHeight,
+    height: 0.085*canvasHeight,
+    width: 0.579 * canvasWidth,
   },
 ];
 let ground_index = 0;
