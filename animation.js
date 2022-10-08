@@ -14,7 +14,6 @@ playerImage.src = "Player/player1.png";
 
 function animate(){
     ctx.clearRect(0,0, canvasWidth, canvasHeight);
-    
     ctx.drawImage(backgrounds[0], 0, 0, canvasWidth, canvasHeight);
     ctx.drawImage(playerImage, player.x, player.y, 100, 100);
     requestAnimationFrame(animate);
