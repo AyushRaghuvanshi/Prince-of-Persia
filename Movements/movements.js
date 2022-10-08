@@ -8,10 +8,10 @@ let velocity = 0;
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") {
-    player.x--;
+    player.x-=12;
   }
   if (event.key === "ArrowRight") {
-    player.x++;
+    player.x+=12;
   }
   if (event.key === "ArrowUp") {
     if (upflag) {
@@ -26,7 +26,8 @@ document.addEventListener("keydown", (event) => {
 function movements() {
   player.y += velocity;
   let condition = checkGround(player.x, player.y, 100, 100);
-  console.log(player.y, velocity, condition);
+  console.log(condition);
+  // console.log(player.y, player.x);
   if (condition === true) {
     
     velocity++;

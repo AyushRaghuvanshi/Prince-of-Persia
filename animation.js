@@ -9,13 +9,16 @@ let backgrounds = [];
 backgrounds.push(new Image());
 // let b = new Image();
 backgrounds[0].src = "Backgrounds/1.jpg"
+let playerImage = new Image();
+playerImage.src = "Player/player1.png";
 
 function animate(){
     ctx.clearRect(0,0, canvasWidth, canvasHeight);
-    ctx.drawImage(backgrounds[0], 0, 0, canvasWidth, canvasHeight)
+    
+    ctx.drawImage(backgrounds[0], 0, 0, canvasWidth, canvasHeight);
+    ctx.drawImage(playerImage, player.x, player.y, 100, 100);
     requestAnimationFrame(animate);
-
 }
-console.log(canvasHeight, canvasWidth);
+// console.log(canvasHeight, canvasWidth);
 
 animate();
