@@ -17,9 +17,9 @@ function checkGround(x, y, height, width) {
   let i = 0;
   console.log(    x >= ground[i].left,    x <= ground[i].left + ground[i].width,     y <= ground[i].top, y <= ground[i].height + ground[i].top);
   if (
-    x >= ground[i].left &&
-    x <= ground[i].left + ground[i].width &&
-    y <= ground[i].top &&
+    x <= ground[i].left ||
+    x >= ground[i].left + ground[i].width||
+    y <= ground[i].top ||
     y <= ground[i].height + ground[i].top
   ) {
     
