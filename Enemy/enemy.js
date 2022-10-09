@@ -5,7 +5,6 @@ class enemy {
     this.health = 100;
   }
   get wherePlayer() {
-    console.log("here");
     if (Math.abs(this.y - player.y) <= 5) {
       if (this.x > player.x) {
         return "left";
@@ -36,6 +35,7 @@ function enemyController() {
   if (enemy1.health <= 0) {
     clearInterval(id);
   }
+
   if (enemy1.inProximity && attackflag) {
     attackflag = false;
     attackid = setTimeout(enemy1.attack, 1000);

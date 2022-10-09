@@ -1,9 +1,9 @@
 let player = {
-  x: 250,
+  x: 550,
   y: 0,
   health: 100,
   height: 100,
-  width: 100
+  width: 100,
 };
 let player_bools = {
   left: false,
