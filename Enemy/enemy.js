@@ -28,24 +28,15 @@ class enemy {
   }
 }
 
-
-
-
 attackflag = true;
 const enemy1 = new enemy();
 id = setInterval(enemyController, 100);
 function enemyController() {
   let attackid = null;
-
-  console.log(
-    player.health,
-    player.x,
-    enemy1.x,
-    player.y,
-    enemy1.y,
-    enemy1.wherePlayer,
-    attackflag
-  );
+  if (enemy1.health <= 0) {
+    clearInterval(id);
+  }
+  console.log(player.health, enemy1.health);
   if (enemy1.inProximity && attackflag) {
     attackflag = false;
     attackid = setTimeout(enemy1.attack, 1000);

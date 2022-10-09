@@ -1,7 +1,7 @@
 let player = {
   x: 250,
   y: 0,
-  health:100
+  health: 100,
 };
 let player_bools = {
   left: false,
@@ -23,7 +23,8 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp") {
     player_bools.up = true;
   }
-  if (event.key === "ArrowDown") {
+  if (event.key === "f") {
+    hit();
   }
 });
 
@@ -36,8 +37,6 @@ document.addEventListener("keyup", (event) => {
   }
   if (event.key === "ArrowUp") {
     player_bools.up = false;
-  }
-  if (event.key === "ArrowDown") {
   }
 });
 function movements() {
@@ -57,7 +56,6 @@ function movements() {
     }
   }
 
-
   player.y += velocity;
   let condition = checkGround(player.x, player.y, 100, 100);
 
@@ -67,5 +65,10 @@ function movements() {
     upflag = true;
     player.y = parseInt(condition) + 1;
     velocity = 0;
+  }
+}
+function hit() {
+  if (enemy1.inProximity) {
+    enemy1.health -= 10;
   }
 }
