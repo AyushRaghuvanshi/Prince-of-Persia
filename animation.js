@@ -8,38 +8,53 @@ let screenNumber = 1;
 let backgrounds = [];
 backgrounds.push(new Image());
 backgrounds.push(new Image());
-// let b = new Image();
 backgrounds[0].src = "Backgrounds/1.jpg";
 backgrounds[1].src = "Backgrounds/2.jpg";
-console.log(backgrounds);
 let playerImage = new Image();
-playerImage.src = "Player/player1.png";
+playerImage.src = "Player/spritesheet.png";
+let playerImagef = new Image();
+playerImagef.src = "Player/spritesheetf.png";
+let x = 0;
+let playerX;
+let playerY;
 
 function animate() {
-  // console.log(player.x, canvasWidth);
-
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   ctx.drawImage(backgrounds[screenNumber - 1], 0, 0, canvasWidth, canvasHeight);
-  ctx.drawImage(playerImage, player.x, player.y - player.height, 100, 100);
+  if(player_bools.isDirectionRight){
+    ctx.drawImage(playerImagef, playerX, playerY, 66, 85, player.x, player.y - player.height, 100, 100);
+  }
+  else{
+    ctx.drawImage(playerImage, playerX, playerY, 66, 85, player.x, player.y - player.height, 100, 100);
+  }
+  console.log(player_bools.isDirectionRight, player_bools.left, player_bools.right);
+  animatePlayer();
   checkScreen();
-  console.log(player.x, canvasWidth, screenNumber);
   requestAnimationFrame(animate);
 }
 
-function checkScreen() {
-  if (player.x + player.width >= canvasWidth) {
-    screenNumber++;
-    clearInterval(gravtity);
-    player.x = 5;
-    player.y = 0;
-
-    gravtity = setInterval(movements, 10);
-  } else if (player.x <= 0) {
-    console.log(screenNumber);
-    screenNumber--;
-    console.log(screenNumber);
-    player.x = canvasWidth - player.width - 5;
+function animatePlayer(){
+  
+  if(player_bools.left){
+    playerY = 85;
+    playerX = Math.floor(x++/4)*66;
+    if(x==52)x=26;
+  }
+  else if(player_bools.right){
+    playerY = 85;
+    playerX = 1934 - Math.floor(x++/4)*66;
+    if(x==52)x=26;
+  }
+  else if(player_bools.isDirectionRight){
+    playerY = 0;
+    playerX = 1934;
+  }
+  else if(!player_bools.isDirectionRight){
+    playerY = 0;
+    playerX = 0;
   }
 }
+
+
 
 animate();

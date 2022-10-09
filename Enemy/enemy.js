@@ -36,7 +36,6 @@ function enemyController() {
   if (enemy1.health <= 0) {
     clearInterval(id);
   }
-  console.log(player.health, enemy1.health);
   if (enemy1.inProximity && attackflag) {
     attackflag = false;
     attackid = setTimeout(enemy1.attack, 1000);

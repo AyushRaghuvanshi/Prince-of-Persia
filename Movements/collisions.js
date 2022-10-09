@@ -41,6 +41,7 @@ function whichGround(x) {
       return i;
     }
   }
+  return -1;
 }
 
 function checkWall(x, y) {

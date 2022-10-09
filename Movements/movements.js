@@ -10,6 +10,7 @@ let player_bools = {
   right: false,
   up: false,
   down: false,
+  isDirectionRight: true
 };
 let upflag = true;
 let gravtity = setInterval(movements, 10);
@@ -19,9 +20,13 @@ let playerSpeed = 3;
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") {
     player_bools.left = true;
+    player_bools.isDirectionRight = false;
+    player_bools.right = false;
   }
   if (event.key === "ArrowRight") {
     player_bools.right = true;
+    player_bools.isDirectionRight = true;
+    player_bools.left = false;
   }
   if (event.key === "ArrowUp") {
     player_bools.up = true;
@@ -75,14 +80,12 @@ function hit() {
 }
 
 
-function checkScreen(){
-  if(player.x + player.width >= canvasWidth){
-      screenNumber++;
-      player.x = 0;
-      player.y = 0;
-  }
-  if(player.x <= 0){
-      screen--;
-      player.x = canvasWidth - player.width;
+function checkScreen() {
+  if (player.x + player.width >= canvasWidth && screenNumber < ground.length) {
+    screenNumber++;
+    player.x = 5;
+  } else if (player.x <= 0 && screenNumber > 1) {
+    screenNumber--;
+    player.x = canvasWidth - player.width - 5;
   }
 }
