@@ -8,7 +8,7 @@ ground = [
   {
     left: 0.481 * canvasWidth,
     top: 0.912 * canvasHeight,
-    height: 0.085*canvasHeight,
+    height: 0.085 * canvasHeight,
     width: 0.579 * canvasWidth,
   },
 ];
@@ -24,6 +24,7 @@ function checkGround(x, y, height, width) {
     return `${ground[ground_index].top}`;
   }
 }
+
 function whichGround(x) {
   for (let i = 0; i < ground.length; i++) {
     if (x >= ground[i].left && x <= ground[i].left + ground[i].width) {
@@ -31,6 +32,7 @@ function whichGround(x) {
     }
   }
 }
+
 function checkWall(x, y) {
   for (let i = 0; i < ground.length; i++) {
     if (i == ground_index) {
@@ -43,4 +45,15 @@ function checkWall(x, y) {
     }
   }
   return true;
+}
+
+function checkRoof(x,y) {
+  for (let i = 0; i < ground.length; i++) {
+    if (y >= ground[i].top) {
+      if (x >= ground[i].left && x <= (ground[i].left + ground[i].width)) {
+        return true;
+      }
+    }
+  }
+  return false;
 }

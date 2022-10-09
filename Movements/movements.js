@@ -39,17 +39,19 @@ document.addEventListener("keyup", (event) => {
   if (event.key === "ArrowDown") {
   }
 });
-
 function movements() {
-  if (player_bools.left && checkWall(player.x - 12, player.y)) {
-    player.x -= 12;
+  if (checkRoof(player.x, player.y + 1)) {
+    velocity = 0;
   }
-  if (player_bools.right && checkWall(player.x + 12, player.y)) {
-    player.x += 12;
+  if (player_bools.left && checkWall(player.x - 6, player.y)) {
+    player.x -= 6;
+  }
+  if (player_bools.right && checkWall(player.x + 6, player.y)) {
+    player.x += 6;
   }
   if (player_bools.up) {
     if (upflag) {
-      velocity = -20;
+      velocity = -15;
       upflag = false;
     }
   }

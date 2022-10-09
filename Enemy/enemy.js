@@ -1,0 +1,5 @@
+class enemy{
+    enemy(){
+        
+    }
+}
