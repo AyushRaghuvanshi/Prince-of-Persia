@@ -1,6 +1,7 @@
 let player = {
   x: 250,
   y: 0,
+  health:100
 };
 let player_bools = {
   left: false,
@@ -55,10 +56,11 @@ function movements() {
       upflag = false;
     }
   }
-  console.log(velocity);
+
+
   player.y += velocity;
   let condition = checkGround(player.x, player.y, 100, 100);
-  // console.log(player.y, player.x);
+
   if (condition === true) {
     velocity++;
   } else {
