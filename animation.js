@@ -16,13 +16,11 @@ let playerImage = new Image();
 playerImage.src = "Player/player1.png";
 
 function animate() {
-  // console.log(player.x, canvasWidth);
-
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   ctx.drawImage(backgrounds[screenNumber - 1], 0, 0, canvasWidth, canvasHeight);
   ctx.drawImage(playerImage, player.x, player.y - player.height, 100, 100);
   checkScreen();
-  console.log(player.x, canvasWidth, screenNumber);
+
   requestAnimationFrame(animate);
 }
 
@@ -35,9 +33,8 @@ function checkScreen() {
 
     gravtity = setInterval(movements, 10);
   } else if (player.x <= 0) {
-    console.log(screenNumber);
     screenNumber--;
-    console.log(screenNumber);
+
     player.x = canvasWidth - player.width - 5;
   }
 }

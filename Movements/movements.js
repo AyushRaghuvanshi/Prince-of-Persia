@@ -1,9 +1,9 @@
 let player = {
-  x: 250,
+  x: 550,
   y: 0,
   health: 100,
   height: 100,
-  width: 100
+  width: 100,
 };
 let player_bools = {
   left: false,
@@ -74,15 +74,14 @@ function hit() {
   }
 }
 
-
-function checkScreen(){
-  if(player.x + player.width >= canvasWidth){
-      screenNumber++;
-      player.x = 0;
-      player.y = 0;
+function checkScreen() {
+  if (player.x + player.width >= canvasWidth) {
+    screenNumber++;
+    player.x = 0;
+    player.y = 0;
   }
-  if(player.x <= 0){
-      screen--;
-      player.x = canvasWidth - player.width;
+  if (player.x <= 0) {
+    screen--;
+    player.x = canvasWidth - player.width;
   }
 }
