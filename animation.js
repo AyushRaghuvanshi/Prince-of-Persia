@@ -29,7 +29,6 @@ function checkScreen() {
     screenNumber++;
     clearInterval(gravtity);
     player.x = 5;
-    player.y = 0;
 
     gravtity = setInterval(movements, 10);
   } else if (player.x <= 0) {
