@@ -13,12 +13,21 @@ climableArea = [
 props = [
   [
     {
-      
-    }
-  ]
-]
+      left: 0.7 * canvasWidth,
+      top: 0.2 * canvasHeight,
+      height: 0.15 * canvasHeight,
+      width: 0.1 * canvasWidth,
+    },
+  ],
+];
 ground = [
   [
+    {
+      left: 0 * canvasWidth,
+      top: 0 * canvasHeight,
+      height: 0.6 * canvasHeight,
+      width: 0.01 * canvasWidth,
+    },
     {
       left: 0.32 * canvasWidth,
       top: 0.325 * canvasHeight,
@@ -71,10 +80,23 @@ for (let i = 0; i < ground[screenNumber - 1].length; i++) {
   let y = document.getElementsByTagName("div")[0];
   y.appendChild(x);
 }
-
+function checkProp(x, y) {
+  if (screenNumber == 1) {
+    let left = 0.7 * canvasWidth;
+    let top = 0.2 * canvasHeight;
+    let height = 0.15 * canvasHeight;
+    let width = 0.1 * canvasWidth;
+  //  console.log(left, top, height, width,x,y);
+    if (x > left && x < left + width) {
+      if (y < top + height) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
 function checkIfClimbable(x, y, height, width) {
   for (let i = 0; i < climableArea[screenNumber - 1].length; i++) {
-    console.log(climableArea[screenNumber - 1][i].left);
     if (
       x > climableArea[screenNumber - 1][i].left &&
       x <

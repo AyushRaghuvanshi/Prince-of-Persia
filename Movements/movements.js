@@ -36,11 +36,13 @@ document.addEventListener("keydown", (event) => {
     player_bools.up = true;
   }
   if (event.key === "f") {
-    player_bools.isHitting = true;
-    player_bools.left = false;
-    player_bools.right = false;
-    player_bools.hittingStart = true;
-    hit();
+    if (player.haveSword) {
+      player_bools.isHitting = true;
+      player_bools.left = false;
+      player_bools.right = false;
+      player_bools.hittingStart = true;
+      hit();
+    }
   }
 });
 
@@ -56,6 +58,10 @@ document.addEventListener("keyup", (event) => {
   }
 });
 function movements() {
+  if (checkProp(player.x, player.y)) {
+    player.haveSword = true;
+    console.log("sword");
+  }
   if (player.health <= 0) {
     clearInterval(gravity);
     playerDead();
