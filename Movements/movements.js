@@ -10,7 +10,7 @@ let player_bools = {
   right: false,
   up: false,
   down: false,
-  isDirectionRight: true
+  isDirectionRight: true,
 };
 let upflag = true;
 let gravtity = setInterval(movements, 10);
@@ -67,6 +67,9 @@ function movements() {
     if (upflag) {
       velocity = -10;
       upflag = false;
+      setTimeout(() => {
+        upflag = true;
+      }, 500);
     }
   }
   player.y += velocity;
@@ -74,7 +77,6 @@ function movements() {
   if (condition === true) {
     velocity++;
   } else {
-    upflag = true;
     player.y = parseInt(condition) + 1;
     velocity = 0;
   }
@@ -84,7 +86,6 @@ function hit() {
     enemy1.health -= 10;
   }
 }
-
 
 function checkScreen() {
   if (player.x + player.width >= canvasWidth && screenNumber < ground.length) {

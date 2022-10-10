@@ -1,7 +1,7 @@
 ground = [
   [
     {
-      left: 0.375 * canvasWidth,
+      left: 0.32 * canvasWidth,
       top: 0.325 * canvasHeight,
       height: 0.025 * canvasHeight,
       width: 0.5 * canvasWidth,
@@ -48,7 +48,7 @@ for (let i = 0; i < ground[screenNumber - 1].length; i++) {
   x.style.width = ground[screenNumber - 1][i].width + "px";
   x.style.position = "absolute";
   x.style.backgroundColor = "pink";
-  x.style.opacity = "0.5";
+  x.style.opacity = "0";
   let y = document.getElementsByTagName("div")[0];
   y.appendChild(x);
 }
@@ -90,13 +90,13 @@ function whichGround(x, y, height) {
   return -1;
 }
 
-function checkWall(x, y,width) {
+function checkWall(x, y, width) {
   for (let i = 0; i < ground[screenNumber - 1].length; i++) {
     if (i == ground_index) {
       continue;
     }
     if (
-      x+width >= ground[screenNumber - 1][i].left &&
+      x + width >= ground[screenNumber - 1][i].left &&
       x <= ground[screenNumber - 1][i].left + ground[screenNumber - 1][i].width
     ) {
       if (
