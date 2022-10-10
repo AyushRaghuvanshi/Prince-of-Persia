@@ -69,7 +69,7 @@ function whichGround(x, y, height) {
       x >= ground[screenNumber - 1][i].left &&
       x <=
         ground[screenNumber - 1][i].left + ground[screenNumber - 1][i].width &&
-      y < ground[screenNumber - 1][i].top
+      y < ground[screenNumber - 1][i].top + ground[screenNumber - 1][i].height
     ) {
       console.log(i);
       return i;
