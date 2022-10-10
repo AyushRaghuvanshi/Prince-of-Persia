@@ -10,7 +10,10 @@ let player_bools = {
   right: false,
   up: false,
   down: false,
-  isDirectionRight: true
+  isDirectionRight: true,
+  isHitting: false,
+  hittingStart: false,
+  hittingEnd: false
 };
 let upflag = true;
 let gravtity = setInterval(movements, 10);
@@ -32,6 +35,10 @@ document.addEventListener("keydown", (event) => {
     player_bools.up = true;
   }
   if (event.key === "f") {
+    player_bools.isHitting = true;
+    player_bools.left = false;
+    player_bools.right = false;
+    player_bools.hittingStart = true;
     hit();
   }
 });

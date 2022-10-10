@@ -20,7 +20,7 @@ ground = [
     },
     {
       left: 0,
-      top: 0.538 * canvasHeight,
+      top: 0.537 * canvasHeight,
       height: 0.462 * canvasHeight,
       width: 0.481 * canvasWidth,
     },
@@ -40,18 +40,18 @@ ground = [
     },
   ],
 ];
-for (let i = 0; i < ground[screenNumber - 1].length; i++) {
-  let x = document.createElement("div");
-  x.style.left = ground[screenNumber - 1][i].left + "px";
-  x.style.top = ground[screenNumber - 1][i].top + "px";
-  x.style.height = ground[screenNumber - 1][i].height + "px";
-  x.style.width = ground[screenNumber - 1][i].width + "px";
-  x.style.position = "absolute";
-  x.style.backgroundColor = "pink";
-  x.style.opacity = "0.5";
-  let y = document.getElementsByTagName("div")[0];
-  y.appendChild(x);
-}
+// for (let i = 0; i < ground[screenNumber - 1].length; i++) {
+//   let x = document.createElement("div");
+//   x.style.left = ground[screenNumber - 1][i].left + "px";
+//   x.style.top = ground[screenNumber - 1][i].top + "px";
+//   x.style.height = ground[screenNumber - 1][i].height + "px";
+//   x.style.width = ground[screenNumber - 1][i].width + "px";
+//   x.style.position = "absolute";
+//   x.style.backgroundColor = "pink";
+//   x.style.opacity = "0.5";
+//   let y = document.getElementsByTagName("div")[0];
+//   y.appendChild(x);
+// }
 
 let ground_index = 0;
 function checkGround(x, y, height, width) {
