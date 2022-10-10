@@ -4,6 +4,7 @@ let player = {
   health: 100,
   height: 100,
   width: 100,
+  haveSword: false,
 };
 let player_bools = {
   left: false,
@@ -13,7 +14,7 @@ let player_bools = {
   isDirectionRight: true,
   isHitting: false,
   hittingStart: false,
-  hittingEnd: false
+  hittingEnd: false,
 };
 let upflag = true;
 let gravity = setInterval(movements, 10);
@@ -83,8 +84,9 @@ function movements() {
       player.width
     );
     if (climb !== false) {
+      player_bools.isDirectionRight = true;
       player.y = climb;
-      player.x += 5;
+      player.x += 10;
     } else if (upflag) {
       velocity = -10;
       upflag = false;

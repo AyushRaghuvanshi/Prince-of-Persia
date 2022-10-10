@@ -3,13 +3,20 @@ climableArea = [
     {
       destination: 0.325 * canvasHeight,
       left: 0.3 * canvasWidth,
-      top: 0.325 * canvasHeight,
-      height: 0.3 * canvasHeight,
-      width: 0.035 * canvasWidth,
+      top: 0.33 * canvasHeight,
+      height: 0.27 * canvasHeight,
+      width: 0.1 * canvasWidth,
     },
   ],
+  [],
 ];
-
+props = [
+  [
+    {
+      
+    }
+  ]
+]
 ground = [
   [
     {
@@ -72,7 +79,8 @@ function checkIfClimbable(x, y, height, width) {
       x > climableArea[screenNumber - 1][i].left &&
       x <
         climableArea[screenNumber - 1][i].left +
-          climableArea[screenNumber - 1][i].width
+          climableArea[screenNumber - 1][i].width &&
+      y > climableArea[screenNumber - 1][i].top
     ) {
       return climableArea[screenNumber - 1][i].destination;
     }
