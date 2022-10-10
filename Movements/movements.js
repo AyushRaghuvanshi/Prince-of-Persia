@@ -13,7 +13,7 @@ let player_bools = {
   isDirectionRight: true,
 };
 let upflag = true;
-let gravtity = setInterval(movements, 10);
+let gravity = setInterval(movements, 10);
 let velocity = 0;
 let playerSpeed = 3;
 
@@ -48,9 +48,14 @@ document.addEventListener("keyup", (event) => {
   }
 });
 function movements() {
+  if (player.health <= 0) {
+    clearInterval(gravity);
+    playerDead();
+  }
   if (checkRoof(player.x, player.y + 1)) {
     velocity = 0;
   }
+
   if (
     player_bools.left &&
     checkWall(player.x - playerSpeed, player.y, player.width)
@@ -64,6 +69,7 @@ function movements() {
     player.x += playerSpeed;
   }
   if (player_bools.up) {
+    console.log(checkIfClimbable(player.x, player.y, player.height, player.width));
     if (upflag) {
       velocity = -10;
       upflag = false;
@@ -90,9 +96,30 @@ function hit() {
 function checkScreen() {
   if (player.x + player.width >= canvasWidth && screenNumber < ground.length) {
     screenNumber++;
+    if (enemyOnScreen[screenNumber - 1].ishere == true) {
+      enemy_creation(
+        enemyOnScreen[screenNumber - 1].x,
+        enemyOnScreen[screenNumber - 1].y,
+        enemyOnScreen[screenNumber - 1].health
+      );
+    } else {
+      clearAnimation();
+    }
     player.x = 5;
   } else if (player.x <= 0 && screenNumber > 1) {
     screenNumber--;
+    if (enemyOnScreen[screenNumber - 1].ishere == true) {
+      enemy_creation(
+        enemyOnScreen[screenNumber - 1].x,
+        enemyOnScreen[screenNumber - 1].y,
+        enemyOnScreen[screenNumber - 1].health
+      );
+    } else {
+      clearAnimation();
+    }
     player.x = canvasWidth - player.width - 5;
   }
+}
+function playerDead() {
+  console.log("dead");
 }

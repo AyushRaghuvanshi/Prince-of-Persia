@@ -21,40 +21,56 @@ let playerY;
 function animate() {
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   ctx.drawImage(backgrounds[screenNumber - 1], 0, 0, canvasWidth, canvasHeight);
-  if(player_bools.isDirectionRight){
-    ctx.drawImage(playerImagef, playerX, playerY, 66, 85, player.x, player.y - player.height, 100, 100);
+  if (player_bools.isDirectionRight) {
+    ctx.drawImage(
+      playerImagef,
+      playerX,
+      playerY,
+      66,
+      85,
+      player.x,
+      player.y - player.height,
+      100,
+      100
+    );
+  } else {
+    ctx.drawImage(
+      playerImage,
+      playerX,
+      playerY,
+      66,
+      85,
+      player.x,
+      player.y - player.height,
+      100,
+      100
+    );
   }
-  else{
-    ctx.drawImage(playerImage, playerX, playerY, 66, 85, player.x, player.y - player.height, 100, 100);
-  }
-  console.log(player_bools.isDirectionRight, player_bools.left, player_bools.right);
+
   animatePlayer();
   checkScreen();
   requestAnimationFrame(animate);
 }
 
-function animatePlayer(){
-  
-  if(player_bools.left){
-    playerY = 85;
-    playerX = Math.floor(x++/4)*66;
-    if(x==52)x=26;
+function animatePlayer() {
+  if (player.health <= 0) {
+    return;
   }
-  else if(player_bools.right){
+  if (player_bools.left) {
     playerY = 85;
-    playerX = 1934 - Math.floor(x++/4)*66;
-    if(x==52)x=26;
-  }
-  else if(player_bools.isDirectionRight){
+    playerX = Math.floor(x++ / 4) * 66;
+    if (x == 52) x = 26;
+  } else if (player_bools.right) {
+    playerY = 85;
+    playerX = 1934 - Math.floor(x++ / 4) * 66;
+    if (x == 52) x = 26;
+  } else if (player_bools.isDirectionRight) {
     playerY = 0;
     playerX = 1934;
-  }
-  else if(!player_bools.isDirectionRight){
+  } else if (!player_bools.isDirectionRight) {
     playerY = 0;
     playerX = 0;
   }
 }
-
-
 
 animate();
