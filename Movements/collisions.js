@@ -3,13 +3,20 @@ climableArea = [
     {
       destination: 0.325 * canvasHeight,
       left: 0.3 * canvasWidth,
-      top: 0.325 * canvasHeight,
-      height: 0.3 * canvasHeight,
+      top: 0.33 * canvasHeight,
+      height: 0.27 * canvasHeight,
       width: 0.1 * canvasWidth,
     },
   ],
+  [],
 ];
-
+props = [
+  [
+    {
+      
+    }
+  ]
+]
 ground = [
   [
     {
@@ -52,18 +59,18 @@ ground = [
     },
   ],
 ];
-// for (let i = 0; i < ground[screenNumber - 1].length; i++) {
-//   let x = document.createElement("div");
-//   x.style.left = ground[screenNumber - 1][i].left + "px";
-//   x.style.top = ground[screenNumber - 1][i].top + "px";
-//   x.style.height = ground[screenNumber - 1][i].height + "px";
-//   x.style.width = ground[screenNumber - 1][i].width + "px";
-//   x.style.position = "absolute";
-//   x.style.backgroundColor = "pink";
-//   x.style.opacity = "0.5";
-//   let y = document.getElementsByTagName("div")[0];
-//   y.appendChild(x);
-// }
+for (let i = 0; i < ground[screenNumber - 1].length; i++) {
+  let x = document.createElement("div");
+  x.style.left = ground[screenNumber - 1][i].left + "px";
+  x.style.top = ground[screenNumber - 1][i].top + "px";
+  x.style.height = ground[screenNumber - 1][i].height + "px";
+  x.style.width = ground[screenNumber - 1][i].width + "px";
+  x.style.position = "absolute";
+  x.style.backgroundColor = "pink";
+  x.style.opacity = "0.5";
+  let y = document.getElementsByTagName("div")[0];
+  y.appendChild(x);
+}
 
 function checkIfClimbable(x, y, height, width) {
   for (let i = 0; i < climableArea[screenNumber - 1].length; i++) {
@@ -72,7 +79,8 @@ function checkIfClimbable(x, y, height, width) {
       x > climableArea[screenNumber - 1][i].left &&
       x <
         climableArea[screenNumber - 1][i].left +
-          climableArea[screenNumber - 1][i].width
+          climableArea[screenNumber - 1][i].width &&
+      y > climableArea[screenNumber - 1][i].top
     ) {
       return climableArea[screenNumber - 1][i].destination;
     }
