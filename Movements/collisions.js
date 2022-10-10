@@ -1,7 +1,18 @@
+climableArea = [
+  [
+    {
+      left: 0.3 * canvasWidth,
+      top: 0.325 * canvasHeight,
+      height: 0.3 * canvasHeight,
+      width: 0.1 * canvasWidth,
+    },
+  ],
+];
+
 ground = [
   [
     {
-      left: 0.375 * canvasWidth,
+      left: 0.32 * canvasWidth,
       top: 0.325 * canvasHeight,
       height: 0.025 * canvasHeight,
       width: 0.5 * canvasWidth,
@@ -53,6 +64,21 @@ ground = [
 //   y.appendChild(x);
 // }
 
+function checkIfClimbable(x, y, height, width) {
+  for (let i = 0; i < climableArea[screenNumber - 1].length; i++) {
+    console.log(climableArea[screenNumber - 1][i].left);
+    if (
+      x > climableArea[screenNumber - 1][i].left &&
+      x <
+        climableArea[screenNumber - 1][i].left +
+          climableArea[screenNumber - 1][i].width
+    ) {
+      return true;
+    }
+  }
+  return false;
+}
+
 let ground_index = 0;
 function checkGround(x, y, height, width) {
   ground_index = whichGround(x, y, height);
@@ -71,32 +97,25 @@ function checkGround(x, y, height, width) {
 
 function whichGround(x, y, height) {
   for (let i = 0; i < ground[screenNumber - 1].length; i++) {
-    console.log(
-      y < ground[screenNumber - 1][i].top,
-      y,
-      ground[screenNumber - 1][i].top
-    );
-
     if (
       x >= ground[screenNumber - 1][i].left &&
       x <=
         ground[screenNumber - 1][i].left + ground[screenNumber - 1][i].width &&
       y < ground[screenNumber - 1][i].top + ground[screenNumber - 1][i].height
     ) {
-      console.log(i);
       return i;
     }
   }
   return -1;
 }
 
-function checkWall(x, y,width) {
+function checkWall(x, y, width) {
   for (let i = 0; i < ground[screenNumber - 1].length; i++) {
     if (i == ground_index) {
       continue;
     }
     if (
-      x+width >= ground[screenNumber - 1][i].left &&
+      x + width >= ground[screenNumber - 1][i].left &&
       x <= ground[screenNumber - 1][i].left + ground[screenNumber - 1][i].width
     ) {
       if (

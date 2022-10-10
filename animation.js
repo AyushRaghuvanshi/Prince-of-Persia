@@ -43,6 +43,9 @@ function animate() {
 
 let x2 = 0;
 function animatePlayer(){
+  if (player.health <= 0) {
+    return;
+  }
   
   if(player_bools.left && !player_bools.isHitting){
     playerY = 85;
