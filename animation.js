@@ -28,10 +28,10 @@ function animate() {
     ctx.drawImage(playerImage, playerX, playerY, 66, 85, player.x, player.y - player.height, 100, 100);
   }
   else if(player_bools.isDirectionRight && player_bools.isHitting){
-    ctx.drawImage(playerImagef, playerX, playerY, 146, 173, player.x, player.y - player.height, 221, 221);
+    ctx.drawImage(playerImagef, playerX, playerY, 146, 76, player.x, player.y - player.height, 221, 100);
   }
   else if(!player_bools.isDirectionRight && player_bools.isHitting){
-    ctx.drawImage(playerImage, playerX, playerY, 146, 173, player.x, player.y - player.height, 221, 221);
+    ctx.drawImage(playerImage, playerX, playerY, 146, 76, player.x, player.y - player.height, 221, 100);
   }
   
   console.log(player_bools.isDirectionRight, player_bools.left, player_bools.right);
@@ -41,7 +41,7 @@ function animate() {
   requestAnimationFrame(animate);
 }
 
-let x2 = 0;
+let animationSpeed = {attack: 0, run: 0};
 function animatePlayer(){
   if (player.health <= 0) {
     return;
@@ -66,19 +66,19 @@ function animatePlayer(){
     playerX = 0;
   }
   else if(!player_bools.isDirectionRight && player_bools.isHitting){
-    if(x2==0 && player_bools.hittingEnd){
+    if(animationSpeed.attack==0 && player_bools.hittingEnd){
       player_bools.hittingEnd = false;
       player_bools.isHitting = false;
     }
     if(player_bools.hittingStart){
-      playerX = Math.floor(x2++/8)*146;
+      playerX = Math.floor(animationSpeed.attack++/8)*146;
     }
     else{
-      playerX = Math.floor(x2--/8)*146;
+      playerX = Math.floor(animationSpeed.attack--/8)*146;
     }
     playerY = 173;
     
-    if(x2==16){
+    if(animationSpeed.attack==24){
       player_bools.hittingEnd = true;
       player_bools.hittingStart = false;
     }
