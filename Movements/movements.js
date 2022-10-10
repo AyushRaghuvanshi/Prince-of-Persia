@@ -51,15 +51,21 @@ function movements() {
   if (checkRoof(player.x, player.y + 1)) {
     velocity = 0;
   }
-  if (player_bools.left && checkWall(player.x - playerSpeed, player.y)) {
+  if (
+    player_bools.left &&
+    checkWall(player.x - playerSpeed, player.y, player.width)
+  ) {
     player.x -= playerSpeed;
   }
-  if (player_bools.right && checkWall(player.x + playerSpeed, player.y)) {
+  if (
+    player_bools.right &&
+    checkWall(player.x + playerSpeed, player.y, player.width)
+  ) {
     player.x += playerSpeed;
   }
   if (player_bools.up) {
     if (upflag) {
-      velocity = -15;
+      velocity = -10;
       upflag = false;
     }
   }
