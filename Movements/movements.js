@@ -35,7 +35,7 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" && !player_bools.isHitting) {
     player_bools.up = true;
   }
-  if (event.key === "f" && !player_bools.isHitting) {
+  if (event.key === "f" && !player_bools.isHitting && player.haveSword) {
     player_bools.isHitting = true;
     player_bools.left = false;
     player_bools.right = false;
@@ -59,6 +59,10 @@ document.addEventListener("keyup", (event) => {
   }
 });
 function movements() {
+  if (checkProp(player.x, player.y)) {
+    player.haveSword = true;
+    console.log("sword");
+  }
   if (player.health <= 0) {
     clearInterval(gravity);
     playerDead();
