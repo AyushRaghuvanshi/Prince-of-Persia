@@ -76,8 +76,16 @@ function movements() {
     player.x += playerSpeed;
   }
   if (player_bools.up) {
-    console.log(checkIfClimbable(player.x, player.y, player.height, player.width));
-    if (upflag) {
+    let climb = checkIfClimbable(
+      player.x,
+      player.y,
+      player.height,
+      player.width
+    );
+    if (climb !== false) {
+      player.y = climb;
+      player.x += 5;
+    } else if (upflag) {
       velocity = -10;
       upflag = false;
       setTimeout(() => {
@@ -101,7 +109,7 @@ function hit() {
 }
 
 function checkScreen() {
-  if (player.x + player.width >= canvasWidth && screenNumber < ground.length) {
+  if (player.x + player.width >= canvasWidth && screenNumber <= ground.length) {
     screenNumber++;
     if (enemyOnScreen[screenNumber - 1].ishere == true) {
       enemy_creation(

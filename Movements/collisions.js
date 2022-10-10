@@ -1,6 +1,7 @@
 climableArea = [
   [
     {
+      destination: 0.325 * canvasHeight,
       left: 0.3 * canvasWidth,
       top: 0.325 * canvasHeight,
       height: 0.3 * canvasHeight,
@@ -73,7 +74,7 @@ function checkIfClimbable(x, y, height, width) {
         climableArea[screenNumber - 1][i].left +
           climableArea[screenNumber - 1][i].width
     ) {
-      return true;
+      return climableArea[screenNumber - 1][i].destination;
     }
   }
   return false;
