@@ -7,6 +7,18 @@ ground = [
       width: 0.5 * canvasWidth,
     },
     {
+      left: 0.866 * canvasWidth,
+      top: 0 * canvasHeight,
+      height: 0.62 * canvasHeight,
+      width: 0.2 * canvasWidth,
+    },
+    {
+      left: 0.59 * canvasWidth,
+      top: 0.35 * canvasHeight,
+      height: 0.27 * canvasHeight,
+      width: 0.28 * canvasWidth,
+    },
+    {
       left: 0,
       top: 0.538 * canvasHeight,
       height: 0.462 * canvasHeight,
@@ -69,7 +81,7 @@ function whichGround(x, y, height) {
       x >= ground[screenNumber - 1][i].left &&
       x <=
         ground[screenNumber - 1][i].left + ground[screenNumber - 1][i].width &&
-      y < ground[screenNumber - 1][i].top
+      y < ground[screenNumber - 1][i].top + ground[screenNumber - 1][i].height
     ) {
       console.log(i);
       return i;
@@ -78,13 +90,13 @@ function whichGround(x, y, height) {
   return -1;
 }
 
-function checkWall(x, y) {
+function checkWall(x, y,width) {
   for (let i = 0; i < ground[screenNumber - 1].length; i++) {
     if (i == ground_index) {
       continue;
     }
     if (
-      x >= ground[screenNumber - 1][i].left &&
+      x+width >= ground[screenNumber - 1][i].left &&
       x <= ground[screenNumber - 1][i].left + ground[screenNumber - 1][i].width
     ) {
       if (
@@ -101,7 +113,7 @@ function checkWall(x, y) {
 
 function checkRoof(x, y) {
   for (let i = 0; i < ground.length; i++) {
-    if (y >= ground[i].top) {
+    if (y <= ground[i].top) {
       if (x >= ground[i].left && x <= ground[i].left + ground[i].width) {
         return true;
       }
