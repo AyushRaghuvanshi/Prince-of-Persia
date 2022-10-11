@@ -12,8 +12,12 @@ let enemyOnScreen = [
     y: 0.912 * canvasHeight,
     health: 100,
     isAttacking: false,
+    isDirectionRight: false
   },
 ];
+
+let enemyAttackStart = false;
+let enemyAttackEnd = false;
 
 class enemy {
   constructor(x, y, health) {
@@ -24,27 +28,37 @@ class enemy {
   get wherePlayer() {
     if (Math.abs(this.y - player.y) <= 5) {
       if (this.x > player.x) {
-        enemy.isAttacking = true;
+        enemyOnScreen[screenNumber-1].isAttacking = true;
+        enemyOnScreen[screenNumber-1].isDirectionRight = false;
+        enemyAttackStart = true;
         return "left";
       } else {
-        enemy.isAttacking = true;
+        enemyOnScreen[screenNumber-1].isAttacking = true;
+        enemyOnScreen[screenNumber-1].isDirectionRight = true;
+        enemyAttackStart = true;
         return "right";
       }
     } else {
-      enemy.isAttacking = false;
+      enemyOnScreen[screenNumber-1].isAttacking = false;
+      enemyAttackStart = false;
+      enemyAttackEnd = false;
       return "idle";
     }
   }
   get inProximity() {
-    if (Math.abs(this.x - player.x) <= 40) {
+    if (Math.abs(this.x - player.x) <= 300) {
       return true;
     }
+    enemyOnScreen[screenNumber-1].isAttacking = false;
     return false;
   }
-  attack() {
-    player.health -= 10;
 
-    attackflag = true;
+  
+  attack() {
+      player.health -= 10;
+      enemyAttackStart = true;
+      enemyOnScreen[screenNumber-1].isAttacking = true;
+      attackflag = true;
   }
 }
 
@@ -74,7 +88,7 @@ function enemyController() {
 
   if (enemy1.inProximity && attackflag && player.health > 0) {
     attackflag = false;
-    attackid = setTimeout(enemy1.attack, 1000);
+    attackid = setTimeout(enemy1.attack, 200);
   } else {
     if (enemy1.inProximity != true) attackflag = true;
     if (attackid) {

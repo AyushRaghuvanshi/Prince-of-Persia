@@ -19,6 +19,8 @@ let playerX;
 let playerY;
 let enemyImage = new Image();
 enemyImage.src = "Enemy/enemy.png";
+let enemyImagef = new Image();
+enemyImagef.src = "Enemy/enemyf.png";
 let enemyX = 0;
 let enemyY = 0;
 
@@ -51,12 +53,20 @@ function animate() {
 	//enemy
 	animateEnemy();
 
-	if(enemyOnScreen[screenNumber-1].ishere && !enemyOnScreen[screenNumber-1].isAttacking){
+	if(enemyOnScreen[screenNumber-1].ishere && !enemyOnScreen[screenNumber-1].isAttacking && !enemyOnScreen[screenNumber-1].isDirectionRight){
 		ctx.drawImage(enemyImage, 0, 0, 66, 85, enemyOnScreen[screenNumber-1].x, enemyOnScreen[screenNumber-1].y-100, 100, 100);
 	}
-	else if(enemyOnScreen[screenNumber-1].ishere && !enemyOnScreen[screenNumber-1].isAttacking){
-		ctx.drawImage(enemyImage, playerX, playerY, 146, 76, player.x - 121, player.y - player.height, 221, 100 );
+	else if(enemyOnScreen[screenNumber-1].ishere && enemyOnScreen[screenNumber-1].isAttacking && !enemyOnScreen[screenNumber-1].isDirectionRight){
+		ctx.drawImage(enemyImage, enemyX, enemyY, 146, 76, enemyOnScreen[screenNumber-1].x - 121, enemyOnScreen[screenNumber-1].y - 100, 221, 100 );
 	}
+	else if(enemyOnScreen[screenNumber-1].ishere && !enemyOnScreen[screenNumber-1].isAttacking&& enemyOnScreen[screenNumber-1].isDirectionRight){
+		ctx.drawImage(enemyImagef, 0, 0, 66, 85, enemyOnScreen[screenNumber-1].x, enemyOnScreen[screenNumber-1].y-100, 100, 100);
+	}
+	else if(enemyOnScreen[screenNumber-1].ishere && enemyOnScreen[screenNumber-1].isAttacking && enemyOnScreen[screenNumber-1].isDirectionRight){
+		ctx.drawImage(enemyImagef, enemyX, enemyY, 146, 76, enemyOnScreen[screenNumber-1].x - 121, enemyOnScreen[screenNumber-1].y - 100, 221, 100 );
+	}
+
+	console.log(enemyOnScreen[screenNumber-1].isDirectionRight);
 
 
 
@@ -67,8 +77,11 @@ function animate() {
 
 let atFloor = false;
 
-let staggerFrames = { attack: 0, run: 0, climb: 0};
+let staggerFrames = { attack: 0, run: 0, climb: 0, enemyAttack: 0};
 //63
+
+
+
 function animatePlayer() {
 	// if (player.health <= 0) {
 	// 	return;
@@ -155,15 +168,58 @@ function animatePlayer() {
 	}
 }
 
+
 function animateEnemy(){
 	if(enemyOnScreen[screenNumber-1].ishere){
-		if(enemyOnScreen[screenNumber-1].isAttacking){
-			enemyX = Math.floor(staggerFrames.attack++ / 7) * 146;
-			enemyY = 173;
+		if(!enemyOnScreen[screenNumber-1].isDirectionRight){
+			if(enemyOnScreen[screenNumber-1].isAttacking){
+				if (staggerFrames.enemyAttack == 0 && enemyAttackEnd) {
+					enemyAttackEnd = false;
+					enemyAttackStart = false;
+					enemyOnScreen[screenNumber-1].isAttacking = false;
+				}
+				if (enemyAttackStart) {
+					enemyX = Math.floor(staggerFrames.enemyAttack++ / 7) * 146;
+				} else {
+					enemyX = Math.floor(staggerFrames.enemyAttack-- / 7) * 146;
+				}
+				enemyY = 173;
+	
+				if (staggerFrames.enemyAttack == 21) {
+					enemyAttackEnd = true;
+					enemyAttackStart = false;
+					staggerFrames.enemyAttack = 14;
+				}
+			}
+			else{
+				enemyX = 0;
+				enemyY = 0;
+			}
 		}
 		else{
-			enemyX = 0;
-			enemyY = 0;
+			if(enemyOnScreen[screenNumber-1].isAttacking){
+				if (staggerFrames.enemyAttack == 0 && enemyAttackEnd) {
+					enemyAttackEnd = false;
+					enemyAttackStart = false;
+					enemyOnScreen[screenNumber-1].isAttacking = false;
+				}
+				if (enemyAttackStart) {
+					enemyX = 1854 - Math.floor(staggerFrames.enemyAttack++ / 7) * 146;
+				} else {
+					enemyX = 1854 - Math.floor(staggerFrames.enemyAttack-- / 7) * 146;
+				}
+				enemyY = 173;
+	
+				if (staggerFrames.enemyAttack == 21) {
+					enemyAttackEnd = true;
+					enemyAttackStart = false;
+					staggerFrames.enemyAttack = 14;
+				}
+			}
+			else{
+				enemyX = 0;
+				enemyY = 0;
+			}
 		}
 	}
 }
