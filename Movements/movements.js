@@ -72,7 +72,7 @@ document.addEventListener("keyup", (event) => {
 function movements() {
   if (checkProp(player.x, player.y)) {
     player.haveSword = true;
-    console.log("sword");
+    
   }
   if (player.health <= 0) {
     clearInterval(gravity);
@@ -104,12 +104,13 @@ function movements() {
     if (climb !== false) {
       movePlayerToRoof = climb;
       player.y = climb - 100;
+      upflag=false;
       setTimeout(() => {
         movePlayerToRoof = false;
         player.isClimbing = false;
         player_bools.climb1 = false;
         player_bools.up = false;
-        player;
+        upflag=true;
       }, 2000);
       player_bools.isDirectionRight = true;
       if (!player.isClimbing) {
