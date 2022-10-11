@@ -1,3 +1,8 @@
+// const canvas = document.getElementsByTagName("canvas")[0];
+// const canvasWidth = canvas.offsetWidth;
+// const canvasHeight = canvas.offsetHeight;
+
+
 let player = {
   x: 550,
   y: 0,
@@ -5,6 +10,7 @@ let player = {
   height: 100,
   width: 100,
   haveSword: false,
+  isClimbing: false
 };
 let player_bools = {
   left: false,
@@ -15,11 +21,14 @@ let player_bools = {
   isHitting: false,
   hittingStart: false,
   hittingEnd: false,
+  climb1: false,
+  climb2 : false
 };
 let upflag = true;
 let gravity = setInterval(movements, 10);
 let velocity = 0;
 let playerSpeed = 3;
+let movePlayerToRoof = false;
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft" && !player_bools.isHitting) {
@@ -35,14 +44,14 @@ document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowUp" && !player_bools.isHitting) {
     player_bools.up = true;
   }
-  if (event.key === "f" && !player_bools.isHitting && player.haveSword) {
+  if (event.key === "f" && !player_bools.isHitting) {
     player_bools.isHitting = true;
     player_bools.left = false;
     player_bools.right = false;
     player_bools.hittingStart = true;
-    if(!player_bools.isDirectionRight){
+    // if(!player_bools.isDirectionRight){
       // player.x -= 121;
-    }
+    // }
     hit();
   }
 });
@@ -54,7 +63,7 @@ document.addEventListener("keyup", (event) => {
   if (event.key === "ArrowRight") {
     player_bools.right = false;
   }
-  if (event.key === "ArrowUp") {
+  if (event.key === "ArrowUp" && !player.isClimbing) {
     player_bools.up = false;
   }
 });
@@ -91,10 +100,16 @@ function movements() {
       player.width
     );
     if (climb !== false) {
+      movePlayerToRoof = climb;
       player_bools.isDirectionRight = true;
+      if(!player.isClimbing){
+        player_bools.climb1 = true;
+      }
+      player.isClimbing = true;
       player.y = climb;
-      player.x += 10;
+      // player.x += 10;
     } else if (upflag) {
+      // player.isClimbing = false;
       velocity = -10;
       upflag = false;
       setTimeout(() => {

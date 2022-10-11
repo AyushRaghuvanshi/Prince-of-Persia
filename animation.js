@@ -1,6 +1,6 @@
-const canvas = document.getElementsByTagName("canvas")[0];
-const canvasWidth = canvas.offsetWidth;
-const canvasHeight = canvas.offsetHeight;
+// const canvas = document.getElementsByTagName("canvas")[0];
+// const canvasWidth = canvas.offsetWidth;
+// const canvasHeight = canvas.offsetHeight;
 canvas.height = canvasHeight;
 canvas.width = canvasWidth;
 const ctx = canvas.getContext("2d");
@@ -17,72 +17,94 @@ playerImagef.src = "Player/spritesheetf.png";
 let x = 0;
 let playerX;
 let playerY;
+let enemyImage = new Image();
+enemyImage.src = "Enemy/enemy.png";
+let enemyX = 0;
+let enemyY = 0;
+
 
 function animate() {
 	ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+	animatePlayer();
 
-	if (player_bools.isDirectionRight && !player_bools.isHitting) {
+	if (player_bools.isDirectionRight && !player_bools.isHitting && !player.isClimbing) {
 		ctx.drawImage(playerImagef, playerX, playerY, 66, 85, player.x, player.y - player.height, 100, 100);
 	} 
-  else if (!player_bools.isDirectionRight && !player_bools.isHitting) {
+	else if (!player_bools.isDirectionRight && !player_bools.isHitting && !player.isClimbing) {
 		ctx.drawImage(playerImage, playerX, playerY, 66, 85, player.x, player.y - player.height, 100, 100);
 	} 
-  else if (player_bools.isDirectionRight && player_bools.isHitting) {
+	else if (player_bools.isDirectionRight && player_bools.isHitting && !player.isClimbing) {
 		ctx.drawImage(playerImagef, playerX, playerY, 146, 76, player.x, player.y - player.height, 221, 100);
 	} 
-  else if (!player_bools.isDirectionRight && player_bools.isHitting) {
-		ctx.drawImage(playerImage, playerX, playerY, 146, 76, player.x-121, player.y - player.height, 221, 100);
-    
+	else if (!player_bools.isDirectionRight && player_bools.isHitting && !player.isClimbing) {
+		ctx.drawImage(playerImage, playerX, playerY, 146, 76, player.x - 121, player.y - player.height, 221, 100 );
 	}
-  console.log(playerX, 146);
+	else if(player_bools.isDirectionRight && player.isClimbing && player_bools.climb1){
+		ctx.drawImage(playerImagef, playerX, playerY, 50, 113, player.x, player.y, 76, 132);
+	}
+	else if(player_bools.isDirectionRight && player.isClimbing && player_bools.climb2){
+		ctx.drawImage(playerImagef, playerX, playerY, 63, 113, player.x, player.y, 76, 132);
+	}
+	
 
-  
+
+	//enemy
+	animateEnemy();
+
+	if(enemyOnScreen[screenNumber-1].ishere && !enemyOnScreen[screenNumber-1].isAttacking){
+		ctx.drawImage(enemyImage, 0, 0, 66, 85, enemyOnScreen[screenNumber-1].x, enemyOnScreen[screenNumber-1].y-100, 100, 100);
+	}
+	else if(enemyOnScreen[screenNumber-1].ishere && !enemyOnScreen[screenNumber-1].isAttacking){
+		ctx.drawImage(enemyImage, playerX, playerY, 146, 76, player.x - 121, player.y - player.height, 221, 100 );
+	}
+
+
 
 	ctx.drawImage(backgrounds[screenNumber - 1], 0, 0, canvasWidth, canvasHeight);
-	animatePlayer();
 	checkScreen();
 	requestAnimationFrame(animate);
 }
 
-let staggerFrames = { attack: 0, run: 0 };
+let atFloor = false;
 
+let staggerFrames = { attack: 0, run: 0, climb: 0};
+//63
 function animatePlayer() {
 	// if (player.health <= 0) {
 	// 	return;
 	// }
 
-	if (player_bools.left && !player_bools.isHitting) {
+	if (player_bools.left && !player_bools.isHitting && !player.isClimbing) {
 		playerY = 85;
 		playerX = Math.floor(staggerFrames.run++ / 4) * 66;
 		if (staggerFrames.run == 52) {
 			staggerFrames.run = 26;
 		}
-	}
-  else if (player_bools.right && !player_bools.isHitting) {
+	} 
+	else if (player_bools.right && !player_bools.isHitting && !player.isClimbing) {
 		playerY = 85;
 		playerX = 1934 - Math.floor(staggerFrames.run++ / 4) * 66;
 		if (staggerFrames.run == 52) {
 			staggerFrames.run = 26;
 		}
-	}
-  else if (player_bools.isDirectionRight && !player_bools.isHitting) {
+	} 
+	else if (player_bools.isDirectionRight && !player_bools.isHitting && !player.isClimbing) {
 		playerY = 0;
 		playerX = 1934;
 	} 
-  else if (!player_bools.isDirectionRight && !player_bools.isHitting) {
+	else if (!player_bools.isDirectionRight && !player_bools.isHitting && !player.isClimbing) {
 		playerY = 0;
 		playerX = 0;
 	} 
-  else if (!player_bools.isDirectionRight && player_bools.isHitting) {
+	else if (!player_bools.isDirectionRight && player_bools.isHitting && !player.isClimbing) {
 		if (staggerFrames.attack == 0 && player_bools.hittingEnd) {
 			player_bools.hittingEnd = false;
 			player_bools.isHitting = false;
-      // player.x += 121;
+			// player.x += 121;
 		}
 		if (player_bools.hittingStart) {
 			playerX = Math.floor(staggerFrames.attack++ / 7) * 146;
-		} 
-    else {
+		} else {
 			playerX = Math.floor(staggerFrames.attack-- / 7) * 146;
 		}
 		playerY = 173;
@@ -90,18 +112,17 @@ function animatePlayer() {
 		if (staggerFrames.attack == 21) {
 			player_bools.hittingEnd = true;
 			player_bools.hittingStart = false;
-      staggerFrames.attack = 14;
+			staggerFrames.attack = 14;
 		}
-	}
-  else if (player_bools.isDirectionRight && player_bools.isHitting) {
+	} 
+	else if (player_bools.isDirectionRight && player_bools.isHitting && !player.isClimbing) {
 		if (staggerFrames.attack == 0 && player_bools.hittingEnd) {
 			player_bools.hittingEnd = false;
 			player_bools.isHitting = false;
 		}
 		if (player_bools.hittingStart) {
-			playerX = 1854 -  Math.floor(staggerFrames.attack++ / 7) * 146;
-		} 
-    else {
+			playerX = 1854 - Math.floor(staggerFrames.attack++ / 7) * 146;
+		} else {
 			playerX = 1854 - Math.floor(staggerFrames.attack-- / 7) * 146;
 		}
 		playerY = 173;
@@ -109,7 +130,40 @@ function animatePlayer() {
 		if (staggerFrames.attack == 21) {
 			player_bools.hittingEnd = true;
 			player_bools.hittingStart = false;
-      staggerFrames.attack = 14;
+			staggerFrames.attack = 14;
+		}
+	}
+	else if(player_bools.isDirectionRight && player.isClimbing && player_bools.climb1){
+		playerY = 252;
+		playerX = 1950 - Math.floor(staggerFrames.climb++/4)*50;
+		player.y -= 10;
+		if(staggerFrames.climb == 64){
+			staggerFrames.climb = 0;
+			player_bools.climb1 = false;
+			player_bools.climb2 = true;	
+		}
+	}
+	else if(player_bools.isDirectionRight && player.isClimbing && player_bools.climb2){
+		playerY = 369;
+		playerX = 1937 - Math.floor(staggerFrames.climb++/4)*63;
+		if(staggerFrames.climb == 76){
+			player_bools.climb2 = false;
+			staggerFrames.climb = 0;
+			player.isClimbing = false;
+			// player.y = movePlayerToRoof;
+		}
+	}
+}
+
+function animateEnemy(){
+	if(enemyOnScreen[screenNumber-1].ishere){
+		if(enemyOnScreen[screenNumber-1].isAttacking){
+			enemyX = Math.floor(staggerFrames.attack++ / 7) * 146;
+			enemyY = 173;
+		}
+		else{
+			enemyX = 0;
+			enemyY = 0;
 		}
 	}
 }

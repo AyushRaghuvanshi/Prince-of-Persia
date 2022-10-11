@@ -1,3 +1,7 @@
+const canvas = document.getElementsByTagName("canvas")[0];
+const canvasWidth = canvas.offsetWidth;
+const canvasHeight = canvas.offsetHeight;
+
 let enemyOnScreen = [
   {
     ishere: false,
@@ -7,6 +11,7 @@ let enemyOnScreen = [
     x: 0.5 * canvasWidth,
     y: 0.912 * canvasHeight,
     health: 100,
+    isAttacking: false
   },
 ];
 
@@ -19,11 +24,14 @@ class enemy {
   get wherePlayer() {
     if (Math.abs(this.y - player.y) <= 5) {
       if (this.x > player.x) {
+        enemy.isAttacking = true;
         return "left";
       } else {
+        enemy.isAttacking = true;
         return "right";
       }
     } else {
+      enemy.isAttacking = false;
       return "idle";
     }
   }
