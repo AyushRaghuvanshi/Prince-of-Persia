@@ -29,6 +29,7 @@ let velocity = 0;
 let playerSpeed = 3;
 let movePlayerToRoof = false;
 
+
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft" && !player_bools.isHitting) {
     player_bools.left = true;

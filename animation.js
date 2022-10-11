@@ -24,6 +24,10 @@ enemyImagef.src = "Enemy/enemyf.png";
 let enemyX = 0;
 let enemyY = 0;
 
+let sword = {left: 0.7 * canvasWidth, top: 0.2 * canvasHeight, height: 0.15 * canvasHeight, width: 0.1 * canvasWidth};
+let swordImage = new Image();
+swordImage.src = "Player/sword.png";
+
 
 function animate() {
 	ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -59,18 +63,21 @@ function animate() {
 	else if(enemyOnScreen[screenNumber-1].ishere && enemyOnScreen[screenNumber-1].isAttacking && !enemyOnScreen[screenNumber-1].isDirectionRight){
 		ctx.drawImage(enemyImage, enemyX, enemyY, 146, 76, enemyOnScreen[screenNumber-1].x - 121, enemyOnScreen[screenNumber-1].y - 100, 221, 100 );
 	}
-	else if(enemyOnScreen[screenNumber-1].ishere && !enemyOnScreen[screenNumber-1].isAttacking&& enemyOnScreen[screenNumber-1].isDirectionRight){
+	else if(enemyOnScreen[screenNumber-1].ishere && !enemyOnScreen[screenNumber-1].isAttacking && enemyOnScreen[screenNumber-1].isDirectionRight){
 		ctx.drawImage(enemyImagef, 0, 0, 66, 85, enemyOnScreen[screenNumber-1].x, enemyOnScreen[screenNumber-1].y-100, 100, 100);
 	}
 	else if(enemyOnScreen[screenNumber-1].ishere && enemyOnScreen[screenNumber-1].isAttacking && enemyOnScreen[screenNumber-1].isDirectionRight){
 		ctx.drawImage(enemyImagef, enemyX, enemyY, 146, 76, enemyOnScreen[screenNumber-1].x - 121, enemyOnScreen[screenNumber-1].y - 100, 221, 100 );
 	}
 
-	console.log(enemyOnScreen[screenNumber-1].isDirectionRight);
-
-
+	
 
 	ctx.drawImage(backgrounds[screenNumber - 1], 0, 0, canvasWidth, canvasHeight);
+
+	if(!player.haveSword){
+		ctx.drawImage(swordImage, 0, 0, 250, 1093, sword.left, sword.top, 11, 50);
+	}
+
 	checkScreen();
 	requestAnimationFrame(animate);
 }

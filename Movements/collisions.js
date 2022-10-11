@@ -80,15 +80,16 @@ ground = [
 //   let y = document.getElementsByTagName("div")[0];
 //   y.appendChild(x);
 // }
+
+
+
+
+
 function checkProp(x, y) {
   if (screenNumber == 1) {
-    let left = 0.7 * canvasWidth;
-    let top = 0.2 * canvasHeight;
-    let height = 0.15 * canvasHeight;
-    let width = 0.1 * canvasWidth;
   //  console.log(left, top, height, width,x,y);
-    if (x > left && x < left + width) {
-      if (y < top + height) {
+    if (x > sword.left && x < sword.left + sword.width) {
+      if (y < sword.top + sword.height) {
         return true;
       }
     }
