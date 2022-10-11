@@ -1,0 +1,38 @@
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+#menu {
+  height: 100vh;
+  width: 100vw;
+  background-image: url(./menuscreen.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+img {
+  height: 300px;
+  width: auto;
+  left: 62%;
+  top: 50%;
+  position: absolute;
+}
+button {
+  background: none;
+  color: inherit;
+  border: none;
+  height: 20px;
+  width: auto;
+  font-size: 24px;
+  font-weight: 900;
+  cursor: pointer;
+  color: black;
+  position: absolute;
+  left: 65.5%;
+  top: 70%;
+}
+button:hover {
+  color: white;
+}
