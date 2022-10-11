@@ -11,7 +11,7 @@ let enemyOnScreen = [
     x: 0.5 * canvasWidth,
     y: 0.912 * canvasHeight,
     health: 100,
-    isAttacking: false
+    isAttacking: false,
   },
 ];
 
@@ -36,14 +36,14 @@ class enemy {
     }
   }
   get inProximity() {
-    if (Math.abs(this.x - player.x) <= 20) {
+    if (Math.abs(this.x - player.x) <= 40) {
       return true;
     }
     return false;
   }
   attack() {
     player.health -= 10;
-    enemyOnScreen[screenNumber - 1].health -= 10;
+
     attackflag = true;
   }
 }

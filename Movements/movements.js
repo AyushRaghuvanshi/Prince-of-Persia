@@ -2,7 +2,6 @@
 // const canvasWidth = canvas.offsetWidth;
 // const canvasHeight = canvas.offsetHeight;
 
-
 let player = {
   x: 550,
   y: 0,
@@ -10,7 +9,7 @@ let player = {
   height: 100,
   width: 100,
   haveSword: false,
-  isClimbing: false
+  isClimbing: false,
 };
 let player_bools = {
   left: false,
@@ -22,7 +21,7 @@ let player_bools = {
   hittingStart: false,
   hittingEnd: false,
   climb1: false,
-  climb2 : false
+  climb2: false,
 };
 let upflag = true;
 let gravity = setInterval(movements, 10);
@@ -45,14 +44,16 @@ document.addEventListener("keydown", (event) => {
     player_bools.up = true;
   }
   if (event.key === "f" && !player_bools.isHitting) {
-    player_bools.isHitting = true;
-    player_bools.left = false;
-    player_bools.right = false;
-    player_bools.hittingStart = true;
-    // if(!player_bools.isDirectionRight){
+    if (player.haveSword) {
+      player_bools.isHitting = true;
+      player_bools.left = false;
+      player_bools.right = false;
+      player_bools.hittingStart = true;
+      // if(!player_bools.isDirectionRight){
       // player.x -= 121;
-    // }
-    hit();
+      // }
+      hit();
+    }
   }
 });
 
@@ -101,8 +102,16 @@ function movements() {
     );
     if (climb !== false) {
       movePlayerToRoof = climb;
+      player.y = climb - 100;
+      setTimeout(() => {
+        movePlayerToRoof = false;
+        player.isClimbing = false;
+        player_bools.climb1 = false;
+        player_bools.up = false;
+        player;
+      }, 2000);
       player_bools.isDirectionRight = true;
-      if(!player.isClimbing){
+      if (!player.isClimbing) {
         player_bools.climb1 = true;
       }
       player.isClimbing = true;
@@ -121,14 +130,14 @@ function movements() {
   let condition = checkGround(player.x, player.y, 100, 100);
   if (condition === true) {
     velocity++;
-  } 
-  else {
+  } else {
     player.y = parseInt(condition) + 1;
     velocity = 0;
   }
 }
 function hit() {
   if (enemy1.inProximity) {
+    enemyOnScreen[screenNumber - 1].health -= 10;
     enemy1.health -= 10;
   }
 }
