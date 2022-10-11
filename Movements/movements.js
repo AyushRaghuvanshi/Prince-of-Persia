@@ -71,7 +71,7 @@ document.addEventListener("keyup", (event) => {
 function movements() {
   if (checkProp(player.x, player.y)) {
     player.haveSword = true;
-    console.log("sword");
+    
   }
   if (player.health <= 0) {
     clearInterval(gravity);

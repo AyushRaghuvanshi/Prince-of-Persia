@@ -78,12 +78,12 @@ function clearAnimation() {
   }
 }
 function enemyController() {
+  console.log(enemy1.wherePlayer);
   let attackid = null;
   if (enemy1.health <= 0) {
     enemyOnScreen[screenNumber - 1].ishere = false;
     clearInterval(id);
   }
-  console.log(player.health, enemy1.health);
 
   if (enemy1.inProximity && attackflag && player.health > 0) {
     attackflag = false;

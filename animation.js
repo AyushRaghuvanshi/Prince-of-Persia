@@ -52,7 +52,7 @@ function animate() {
 
 	//enemy
 	animateEnemy();
-
+	
 	if(enemyOnScreen[screenNumber-1].ishere && !enemyOnScreen[screenNumber-1].isAttacking && !enemyOnScreen[screenNumber-1].isDirectionRight){
 		ctx.drawImage(enemyImage, 0, 0, 66, 85, enemyOnScreen[screenNumber-1].x, enemyOnScreen[screenNumber-1].y-100, 100, 100);
 	}
@@ -66,7 +66,7 @@ function animate() {
 		ctx.drawImage(enemyImagef, enemyX, enemyY, 146, 76, enemyOnScreen[screenNumber-1].x - 121, enemyOnScreen[screenNumber-1].y - 100, 221, 100 );
 	}
 
-	console.log(enemyOnScreen[screenNumber-1].isDirectionRight);
+	
 
 
 
