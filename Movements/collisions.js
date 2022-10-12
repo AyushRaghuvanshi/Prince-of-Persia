@@ -9,12 +9,7 @@ climableArea = [
     },
   ],
   [],
-  [{
-    left: 0.192 * canvasWidth,
-    top: 0.705 * canvasHeight,
-    height: 0.27 * canvasHeight,
-    width: 0.3 * canvasWidth,
-  }]
+  [],
 ];
 props = [
   [
@@ -76,7 +71,6 @@ ground = [
     },
   ],
   [
-   
     {
       left: 0,
       top: 0.912 * canvasHeight,
@@ -95,7 +89,7 @@ ground = [
     //   height: 0.208 * canvasHeight,
     //   width: 0.582 * canvasWidth,
     // }
-  ]
+  ],
 ];
 
 // for (let i = 0; i < ground[screenNumber - 1].length; i++) {
