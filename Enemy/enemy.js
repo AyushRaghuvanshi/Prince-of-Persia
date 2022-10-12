@@ -56,9 +56,9 @@ class enemy {
       enemyAttackStart = true;
       player.health -= 2;
       slashEnemy.play();
-      if(enemy.isDirectionRight){
-        enemy.x += 121;
-      }
+      // if(enemy.isDirectionRight){
+      //   enemy.x += 121;
+      // }
       return true;
     }
     enemyOnScreen[screenNumber - 1].isAttacking = false;

@@ -80,7 +80,7 @@ function animate() {
 		  ctx.drawImage(enemyImagef, 1934, 0, 66, 85, enemyOnScreen[screenNumber-1].x, enemyOnScreen[screenNumber-1].y-100, 100, 100);
 	  }
 	  else if(enemyOnScreen[screenNumber-1].ishere && enemyOnScreen[screenNumber-1].isAttacking && enemyOnScreen[screenNumber-1].isDirectionRight){
-		  ctx.drawImage(enemyImagef, enemyX, enemyY, 146, 76, enemyOnScreen[screenNumber-1].x - 121, enemyOnScreen[screenNumber-1].y - 100, 221, 100 );
+		  ctx.drawImage(enemyImagef, enemyX, enemyY, 146, 76, enemyOnScreen[screenNumber-1].x, enemyOnScreen[screenNumber-1].y - 100, 221, 100 );
 	  }
   // } 
 
@@ -239,7 +239,7 @@ function animateEnemy() {
           enemyAttackEnd = false;
           enemyAttackStart = false;
           enemyOnScreen[screenNumber - 1].isAttacking = false;
-          enemy.x -= 121;
+          // enemy.x -= 121;
         }
         if (enemyAttackStart) {
           enemyX = 1854 - Math.floor(staggerFrames.enemyAttack++ / 7) * 146;
