@@ -5,7 +5,7 @@ climableArea = [
       left: 0.335 * canvasWidth,
       top: 0.33 * canvasHeight,
       height: 0.27 * canvasHeight,
-      width: 0.1 * canvasWidth,
+      width: 0.015 * canvasWidth,
     },
   ],
   [],
