@@ -10,10 +10,11 @@ climableArea = [
   ],
   [],
   [{
-    left: 0.192 * canvasWidth,
+    destination:  0.705 * canvasHeight,
+    left: 0.15 * canvasWidth,
     top: 0.705 * canvasHeight,
     height: 0.208 * canvasHeight,
-    width: 0.1 * canvasWidth,
+    width: 1 * canvasWidth,
   }]
 ];
 props = [

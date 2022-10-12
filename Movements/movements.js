@@ -42,7 +42,7 @@ document.addEventListener("keydown", (event) => {
     !player.isClimbing
   ) {
     run.play();
-    
+
     player_bools.left = true;
     player_bools.isDirectionRight = false;
     player_bools.right = false;
@@ -122,6 +122,7 @@ function movements() {
       player.height,
       player.width
     );
+    console.log(climb, player.x, player.y);
     if (climb !== false) {
       // player.y = climb;
       upflag = false;
