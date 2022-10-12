@@ -9,6 +9,7 @@ climableArea = [
     },
   ],
   [],
+  []
 ];
 props = [
   [
@@ -67,6 +68,20 @@ ground = [
       width: canvasWidth,
     },
   ],
+  [
+    {
+      left: 0,
+      top: 0.912 * canvasHeight,
+      height: 0.085 * canvasHeight,
+      width: 0.315 * canvasWidth,
+    },
+    {
+      left: 0.315 * canvasWidth,
+      top: 0.62 * canvasHeight,
+      height: 0.293 * canvasHeight,
+      width: 0.685 * canvasWidth,
+    }
+  ]
 ];
 // for (let i = 0; i < ground[screenNumber - 1].length; i++) {
 //   let x = document.createElement("div");
@@ -88,7 +103,7 @@ ground = [
 function checkProp(x, y) {
   if (screenNumber == 1) {
   //  console.log(left, top, height, width,x,y);
-    if (x > sword.left && x < sword.left + sword.width) {
+    if (x + 100 > sword.left && x + 100 < sword.left + sword.width) {
       if (y < sword.top + sword.height) {
         return true;
       }
@@ -135,6 +150,7 @@ function whichGround(x, y, height) {
         ground[screenNumber - 1][i].left + ground[screenNumber - 1][i].width &&
       y < ground[screenNumber - 1][i].top + ground[screenNumber - 1][i].height
     ) {
+      console.log(i);
       return i;
     }
   }

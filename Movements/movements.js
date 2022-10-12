@@ -27,16 +27,15 @@ let upflag = true;
 let gravity = setInterval(movements, 10);
 let velocity = 0;
 let playerSpeed = 3;
-let movePlayerToRoof = false;
 
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowLeft" && !player_bools.isHitting) {
+  if (event.key === "ArrowLeft" && !player_bools.isHitting && !player.isClimbing) {
     player_bools.left = true;
     player_bools.isDirectionRight = false;
     player_bools.right = false;
   }
-  if (event.key === "ArrowRight" && !player_bools.isHitting) {
+  if (event.key === "ArrowRight" && !player_bools.isHitting && !player.isClimbing) {
     player_bools.right = true;
     player_bools.isDirectionRight = true;
     player_bools.left = false;
@@ -50,9 +49,9 @@ document.addEventListener("keydown", (event) => {
       player_bools.left = false;
       player_bools.right = false;
       player_bools.hittingStart = true;
-      // if(!player_bools.isDirectionRight){
-      // player.x -= 121;
-      // }
+      if(!player_bools.isDirectionRight){
+      player.x -= 121;
+      }
       hit();
     }
   }
@@ -72,7 +71,6 @@ document.addEventListener("keyup", (event) => {
 function movements() {
   if (checkProp(player.x, player.y)) {
     player.haveSword = true;
-    
   }
   if (player.health <= 0) {
     clearInterval(gravity);
@@ -102,8 +100,7 @@ function movements() {
       player.width
     );
     if (climb !== false) {
-      movePlayerToRoof = climb;
-      player.y = climb - 100;
+      // player.y = climb;
       upflag=false;
       setTimeout(() => {
         movePlayerToRoof = false;
@@ -117,6 +114,7 @@ function movements() {
         player_bools.climb1 = true;
       }
       player.isClimbing = true;
+      playerClimbY = 30;
       player.y = climb;
       // player.x += 10;
     } else if (upflag) {
