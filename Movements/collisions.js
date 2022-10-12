@@ -68,6 +68,30 @@ ground = [
     },
   ],
 ];
+let added = false;
+function sword() {
+  let sword = new Image();
+  sword.src = "../UI/dagger.png";
+  if (screenNumber == 1 && player.haveSword == false && added == false) {
+    let sword = new Image();
+    sword.style.height = 100 + "px";
+    sword.style.width = "auto";
+    sword.src = "../UI/dagger.png";
+    sword.style.position = "absolute";
+    sword.style.left = props[0][0].left + 50 + "px";
+    sword.style.top = props[0][0].top - 10 + "px";
+    added = true;
+
+    document.getElementsByTagName("span")[0].appendChild(sword);
+  } else if (screenNumber != 1 || player.haveSword != false) {
+    try {
+      let x = document.getElementsByTagName("span")[0];
+      x.removeChild(x.firstChild);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+}
 // for (let i = 0; i < ground[screenNumber - 1].length; i++) {
 //   let x = document.createElement("div");
 //   x.style.left = ground[screenNumber - 1][i].left + "px";
@@ -86,7 +110,7 @@ function checkProp(x, y) {
     let top = 0.2 * canvasHeight;
     let height = 0.15 * canvasHeight;
     let width = 0.1 * canvasWidth;
-  //  console.log(left, top, height, width,x,y);
+    //  console.log(left, top, height, width,x,y);
     if (x > left && x < left + width) {
       if (y < top + height) {
         return true;
