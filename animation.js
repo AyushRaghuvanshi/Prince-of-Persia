@@ -43,9 +43,9 @@ function animate() {
   animatePlayer();
 
   
-  // if(Math.floor(player.health)==0){
+  // if(Math.floor(player.health)!=0){
 
-    console.log(player.health);
+    // console.log(player.health);
 	  if (player_bools.isDirectionRight && !player_bools.isHitting && !player.isClimbing) {
 		  ctx.drawImage(playerImagef, playerX, playerY, 66, 85, player.x, player.y - player.height, 100, 100);
 	  } 
