@@ -20,7 +20,7 @@ let enemyOnScreen = [
   {
     ishere: true,
     x: 0.75 * canvasWidth,
-    y: 0.5 * canvasHeight,
+    y: 0.912 * canvasHeight,
     health: 100,
     isAttacking: false,
     isDirectionRight: false,
@@ -38,34 +38,37 @@ class enemy {
   }
   get wherePlayer() {
     if (Math.abs(this.y - player.y) <= 5) {
+     
       if (this.x > player.x) {
-        enemyOnScreen[screenNumber - 1].isAttacking = true;
         enemyOnScreen[screenNumber - 1].isDirectionRight = false;
-        enemyAttackStart = true;
         return "left";
       } else {
-        enemyOnScreen[screenNumber - 1].isAttacking = true;
         enemyOnScreen[screenNumber - 1].isDirectionRight = true;
-        enemyAttackStart = true;
         return "right";
       }
     } else {
-      enemyOnScreen[screenNumber - 1].isAttacking = false;
-      enemyAttackStart = false;
-      enemyAttackEnd = false;
       return "idle";
     }
   }
   get inProximity() {
     if (Math.abs(this.x - player.x) <= 180) {
+      enemyOnScreen[screenNumber - 1].isAttacking = true;
+      enemyAttackStart = true;
+      player.health -= 5;
+      slashEnemy.play();
+      if(enemy.isDirectionRight){
+        enemy.x += 121;
+      }
       return true;
     }
     enemyOnScreen[screenNumber - 1].isAttacking = false;
+    enemyAttackStart = false;
+    enemyAttackEnd = false;
     return false;
   }
 
   attack() {
-    player.health -= 10;
+    
     let step = parseInt(healthbar_width) / 9;
     console.log(healthbar.style.width - step);
     healthbar.style.width =

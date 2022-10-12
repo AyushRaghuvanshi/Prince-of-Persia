@@ -12,8 +12,8 @@ climableArea = [
   [{
     left: 0.192 * canvasWidth,
     top: 0.705 * canvasHeight,
-    height: 0.208 * canvasHeight,
-    width: 0.1 * canvasWidth,
+    height: 0.27 * canvasHeight,
+    width: 0.3 * canvasWidth,
   }]
 ];
 props = [
@@ -86,20 +86,20 @@ ground = [
       left: 0,
       top: 0.912 * canvasHeight,
       height: 0.085 * canvasHeight,
-      width: 0.192 * canvasWidth,
+      width: canvasWidth,
     },
-    {
-      left: 0.192 * canvasWidth,
-      top: 0.705 * canvasHeight,
-      height: 0.208 * canvasHeight,
-      width: 0.225 * canvasWidth,
-    },
-    {
-      left: 0.417 * canvasWidth,
-      top: 0.497 * canvasHeight,
-      height: 0.208 * canvasHeight,
-      width: 0.582 * canvasWidth,
-    }
+    // {
+    //   left: 0.25 * canvasWidth,
+    //   top: 0.705 * canvasHeight,
+    //   height: 0.208 * canvasHeight,
+    //   width: 0.225 * canvasWidth,
+    // },
+    // {
+    //   left: 0.417 * canvasWidth,
+    //   top: 0.497 * canvasHeight,
+    //   height: 0.208 * canvasHeight,
+    //   width: 0.582 * canvasWidth,
+    // }
   ]
 ];
 

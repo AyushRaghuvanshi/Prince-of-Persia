@@ -1,10 +1,11 @@
 // const canvas = document.getElementsByTagName("canvas")[0];
 // const canvasWidth = canvas.offsetWidth;
 // const canvasHeight = canvas.offsetHeight;
-let run = new Audio("../audio/run.mp3");
-let audiom = new Audio("../UI/intro.mp3");
-let pickup = new Audio("../audio/pickup.mp3");
-let slash = new Audio("../audio/slash.mp3");
+let run = new Audio("audio/run.mp3");
+let audiom = new Audio("UI/intro.mp3");
+let pickup = new Audio("audio/pickup.mp3");
+let slashPlayer = new Audio("audio/slash.mp3");
+let slashEnemy = new Audio("audio/slash.mp3");
 audiom.autoplay = true;
 audiom.play();
 audiom.loop = true;
@@ -17,6 +18,7 @@ let player = {
   width: 100,
   haveSword: false,
   isClimbing: false,
+  isDead : false
 };
 let player_bools = {
   left: false,
@@ -62,7 +64,7 @@ document.addEventListener("keydown", (event) => {
   }
   if (event.key === "f" && !player_bools.isHitting) {
     if (player.haveSword) {
-      slash.play();
+      slashPlayer.play();
       player_bools.isHitting = true;
       player_bools.left = false;
       player_bools.right = false;
@@ -196,5 +198,5 @@ function checkScreen() {
 }
 function playerDead() {
   player.haveSword = false;
-  console.log("dead");
+  player.isDead = true;
 }
