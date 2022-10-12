@@ -58,7 +58,6 @@ function animate() {
 	}
 	
 
-
 	//enemy
 	animateEnemy();
 	
@@ -79,7 +78,7 @@ function animate() {
 
 	ctx.drawImage(backgrounds[screenNumber - 1], 0, 0, canvasWidth, canvasHeight);
 
-	if(!player.haveSword){
+	if(!player.haveSword && screenNumber==1){
 		ctx.drawImage(swordImage, 0, 0, 250, 1093, sword.left, sword.top, 18, 80);
 	}
 

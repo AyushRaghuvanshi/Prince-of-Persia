@@ -15,7 +15,12 @@ let enemyOnScreen = [
     isDirectionRight: false,
   },
   {
-    ishere: false
+    ishere: true,
+    x: 0.75 * canvasWidth,
+    y: 0.5 * canvasHeight,
+    health: 100,
+    isAttacking: false,
+    isDirectionRight: false,
   }
 ];
 
