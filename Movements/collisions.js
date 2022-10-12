@@ -9,7 +9,12 @@ climableArea = [
     },
   ],
   [],
-  [],
+  [{
+    left: 0.192 * canvasWidth,
+    top: 0.705 * canvasHeight,
+    height: 0.208 * canvasHeight,
+    width: 0.1 * canvasWidth,
+  }]
 ];
 props = [
   [
@@ -20,6 +25,14 @@ props = [
       width: 0.1 * canvasWidth,
     },
   ],
+  [
+    {
+
+    }
+  ],
+  [
+    
+  ]
 ];
 ground = [
   [
@@ -73,15 +86,21 @@ ground = [
       left: 0,
       top: 0.912 * canvasHeight,
       height: 0.085 * canvasHeight,
-      width: 0.315 * canvasWidth,
+      width: 0.192 * canvasWidth,
     },
     {
-      left: 0.315 * canvasWidth,
-      top: 0.62 * canvasHeight,
-      height: 0.293 * canvasHeight,
-      width: 0.685 * canvasWidth,
+      left: 0.192 * canvasWidth,
+      top: 0.705 * canvasHeight,
+      height: 0.208 * canvasHeight,
+      width: 0.225 * canvasWidth,
     },
-  ],
+    {
+      left: 0.417 * canvasWidth,
+      top: 0.497 * canvasHeight,
+      height: 0.208 * canvasHeight,
+      width: 0.582 * canvasWidth,
+    }
+  ]
 ];
 
 // for (let i = 0; i < ground[screenNumber - 1].length; i++) {

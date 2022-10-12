@@ -42,172 +42,41 @@ function animate() {
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   animatePlayer();
 
-  if (
-    player_bools.isDirectionRight &&
-    !player_bools.isHitting &&
-    !player.isClimbing
-  ) {
-    ctx.drawImage(
-      playerImagef,
-      playerX,
-      playerY,
-      66,
-      85,
-      player.x,
-      player.y - player.height,
-      100,
-      100
-    );
-  } else if (
-    !player_bools.isDirectionRight &&
-    !player_bools.isHitting &&
-    !player.isClimbing
-  ) {
-    ctx.drawImage(
-      playerImage,
-      playerX,
-      playerY,
-      66,
-      85,
-      player.x,
-      player.y - player.height,
-      100,
-      100
-    );
-  } else if (
-    player_bools.isDirectionRight &&
-    player_bools.isHitting &&
-    !player.isClimbing
-  ) {
-    ctx.drawImage(
-      playerImagef,
-      playerX,
-      playerY,
-      146,
-      76,
-      player.x,
-      player.y - player.height,
-      221,
-      100
-    );
-  } else if (
-    !player_bools.isDirectionRight &&
-    player_bools.isHitting &&
-    !player.isClimbing
-  ) {
-    ctx.drawImage(
-      playerImage,
-      playerX,
-      playerY,
-      146,
-      76,
-      player.x,
-      player.y - player.height,
-      221,
-      100
-    );
-  } else if (
-    player_bools.isDirectionRight &&
-    player.isClimbing &&
-    player_bools.climb1
-  ) {
-    ctx.drawImage(
-      playerImagef,
-      playerX,
-      playerY,
-      50,
-      113,
-      player.x,
-      player.y + playerClimbY,
-      76,
-      132
-    );
-  } else if (
-    player_bools.isDirectionRight &&
-    player.isClimbing &&
-    player_bools.climb2
-  ) {
-    ctx.drawImage(
-      playerImagef,
-      playerX,
-      playerY,
-      63,
-      113,
-      player.x,
-      player.y + playerClimbY,
-      76,
-      132
-    );
-  }
+	if (player_bools.isDirectionRight && !player_bools.isHitting && !player.isClimbing) {
+		ctx.drawImage(playerImagef, playerX, playerY, 66, 85, player.x, player.y - player.height, 100, 100);
+	} 
+	else if (!player_bools.isDirectionRight && !player_bools.isHitting && !player.isClimbing) {
+		ctx.drawImage(playerImage, playerX, playerY, 66, 85, player.x, player.y - player.height, 100, 100);
+	} 
+	else if (player_bools.isDirectionRight && player_bools.isHitting && !player.isClimbing) {
+		ctx.drawImage(playerImagef, playerX, playerY, 146, 76, player.x, player.y - player.height, 221, 100);
+	} 
+	else if (!player_bools.isDirectionRight && player_bools.isHitting && !player.isClimbing) {
+		ctx.drawImage(playerImage, playerX, playerY, 146, 76, player.x, player.y - player.height, 221, 100 );
+	}
+	else if(player_bools.isDirectionRight && player.isClimbing && player_bools.climb1){
+		ctx.drawImage(playerImagef, playerX, playerY, 50, 113, player.x, player.y + playerClimbY, 76, 132);
+	}
+	else if(player_bools.isDirectionRight && player.isClimbing && player_bools.climb2){
+		ctx.drawImage(playerImagef, playerX, playerY, 63, 113, player.x, player.y + playerClimbY, 76, 132);
+	}
+	
 
-  //enemy
-  animateEnemy();
-
-  if (
-    enemyOnScreen[screenNumber - 1].ishere &&
-    !enemyOnScreen[screenNumber - 1].isAttacking &&
-    !enemyOnScreen[screenNumber - 1].isDirectionRight
-  ) {
-    ctx.drawImage(
-      enemyImage,
-      0,
-      0,
-      66,
-      85,
-      enemyOnScreen[screenNumber - 1].x,
-      enemyOnScreen[screenNumber - 1].y - 100,
-      100,
-      100
-    );
-  } else if (
-    enemyOnScreen[screenNumber - 1].ishere &&
-    enemyOnScreen[screenNumber - 1].isAttacking &&
-    !enemyOnScreen[screenNumber - 1].isDirectionRight
-  ) {
-    ctx.drawImage(
-      enemyImage,
-      enemyX,
-      enemyY,
-      146,
-      76,
-      enemyOnScreen[screenNumber - 1].x - 121,
-      enemyOnScreen[screenNumber - 1].y - 100,
-      221,
-      100
-    );
-  } else if (
-    enemyOnScreen[screenNumber - 1].ishere &&
-    !enemyOnScreen[screenNumber - 1].isAttacking &&
-    enemyOnScreen[screenNumber - 1].isDirectionRight
-  ) {
-    ctx.drawImage(
-      enemyImagef,
-      1934,
-      0,
-      66,
-      85,
-      enemyOnScreen[screenNumber - 1].x,
-      enemyOnScreen[screenNumber - 1].y - 100,
-      100,
-      100
-    );
-  } else if (
-    enemyOnScreen[screenNumber - 1].ishere &&
-    enemyOnScreen[screenNumber - 1].isAttacking &&
-    enemyOnScreen[screenNumber - 1].isDirectionRight
-  ) {
-    ctx.drawImage(
-      enemyImagef,
-      enemyX,
-      enemyY,
-      146,
-      76,
-      enemyOnScreen[screenNumber - 1].x - 121,
-      enemyOnScreen[screenNumber - 1].y - 100,
-      221,
-      100
-    );
-  }
+	//enemy
+	animateEnemy();
+	
+	if(enemyOnScreen[screenNumber-1].ishere && !enemyOnScreen[screenNumber-1].isAttacking && !enemyOnScreen[screenNumber-1].isDirectionRight){
+		ctx.drawImage(enemyImage, 0, 0, 66, 85, enemyOnScreen[screenNumber-1].x, enemyOnScreen[screenNumber-1].y-100, 100, 100);
+	}
+	else if(enemyOnScreen[screenNumber-1].ishere && enemyOnScreen[screenNumber-1].isAttacking && !enemyOnScreen[screenNumber-1].isDirectionRight){
+		ctx.drawImage(enemyImage, enemyX, enemyY, 146, 76, enemyOnScreen[screenNumber-1].x - 121, enemyOnScreen[screenNumber-1].y - 100, 221, 100 );
+	}
+	else if(enemyOnScreen[screenNumber-1].ishere && !enemyOnScreen[screenNumber-1].isAttacking && enemyOnScreen[screenNumber-1].isDirectionRight){
+		ctx.drawImage(enemyImagef, 1934, 0, 66, 85, enemyOnScreen[screenNumber-1].x, enemyOnScreen[screenNumber-1].y-100, 100, 100);
+	}
+	else if(enemyOnScreen[screenNumber-1].ishere && enemyOnScreen[screenNumber-1].isAttacking && enemyOnScreen[screenNumber-1].isDirectionRight){
+		ctx.drawImage(enemyImagef, enemyX, enemyY, 146, 76, enemyOnScreen[screenNumber-1].x - 121, enemyOnScreen[screenNumber-1].y - 100, 221, 100 );
+	}
 
   ctx.drawImage(backgrounds[screenNumber - 1], 0, 0, canvasWidth, canvasHeight);
 
