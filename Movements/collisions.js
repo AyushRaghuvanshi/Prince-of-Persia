@@ -5,17 +5,19 @@ climableArea = [
       left: 0.335 * canvasWidth,
       top: 0.33 * canvasHeight,
       height: 0.27 * canvasHeight,
-      width: 0.1 * canvasWidth,
+      width: 0.015 * canvasWidth,
     },
   ],
   [],
-  [{
-    destination:  0.705 * canvasHeight,
-    left: 0.15 * canvasWidth,
-    top: 0.705 * canvasHeight,
-    height: 0.208 * canvasHeight,
-    width: 1 * canvasWidth,
-  }]
+  [
+    {
+      destination: 0.705 * canvasHeight,
+      left: 0.1 * canvasWidth,
+      top: 0.705 * canvasHeight,
+      height: 0.208 * canvasHeight,
+      width: 0.1 * canvasWidth,
+    },
+  ],
 ];
 props = [
   [
@@ -26,14 +28,8 @@ props = [
       width: 0.1 * canvasWidth,
     },
   ],
-  [
-    {
-
-    }
-  ],
-  [
-    
-  ]
+  [{}],
+  [],
 ];
 ground = [
   [
@@ -83,25 +79,15 @@ ground = [
     },
   ],
   [
+   
     {
       left: 0,
       top: 0.912 * canvasHeight,
       height: 0.085 * canvasHeight,
-      width: 0.192 * canvasWidth,
+      width: 1 * canvasWidth,
     },
-    {
-      left: 0.192 * canvasWidth,
-      top: 0.705 * canvasHeight,
-      height: 0.208 * canvasHeight,
-      width: 0.225 * canvasWidth,
-    },
-    {
-      left: 0.417 * canvasWidth,
-      top: 0.497 * canvasHeight,
-      height: 0.208 * canvasHeight,
-      width: 0.582 * canvasWidth,
-    }
-  ]
+   
+  ],
 ];
 
 // for (let i = 0; i < ground[screenNumber - 1].length; i++) {
@@ -113,7 +99,7 @@ ground = [
 //   x.style.position = "absolute";
 //   x.style.backgroundColor = "pink";
 //   x.style.opacity = "0.5";
-//   let y = document.getElementsByTagName("div")[0];
+//   let y = document.getElementsByClassName("d")[0];
 //   y.appendChild(x);
 // }
 
