@@ -17,6 +17,9 @@ let enemyOnScreen = [
     isAttacking: false,
     isDirectionRight: false,
   },
+  {
+    ishere: false
+  }
 ];
 
 let enemyAttackStart = false;
@@ -49,7 +52,7 @@ class enemy {
     }
   }
   get inProximity() {
-    if (Math.abs(this.x - player.x) <= 300) {
+    if (Math.abs(this.x - player.x) <= 180) {
       return true;
     }
     enemyOnScreen[screenNumber - 1].isAttacking = false;
@@ -77,7 +80,7 @@ function enemy_creation(x, y, health) {
   if (id != null) {
     clearInterval(id);
   }
-  id = setInterval(enemyController, 100);
+  id = setInterval(enemyController, 1000);
 }
 function clearAnimation() {
   if (id != null) {

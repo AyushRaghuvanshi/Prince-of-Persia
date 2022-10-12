@@ -9,6 +9,7 @@ climableArea = [
     },
   ],
   [],
+  []
 ];
 props = [
   [
@@ -67,6 +68,20 @@ ground = [
       width: canvasWidth,
     },
   ],
+  [
+    {
+      left: 0,
+      top: 0.912 * canvasHeight,
+      height: 0.085 * canvasHeight,
+      width: 0.315 * canvasWidth,
+    },
+    {
+      left: 0.315 * canvasWidth,
+      top: 0.62 * canvasHeight,
+      height: 0.293 * canvasHeight,
+      width: 0.685 * canvasWidth,
+    }
+  ]
 ];
 let added = false;
 function sword() {
@@ -104,15 +119,16 @@ function sword() {
 //   let y = document.getElementsByTagName("div")[0];
 //   y.appendChild(x);
 // }
+
+
+
+
+
 function checkProp(x, y) {
   if (screenNumber == 1) {
-    let left = 0.7 * canvasWidth;
-    let top = 0.2 * canvasHeight;
-    let height = 0.15 * canvasHeight;
-    let width = 0.1 * canvasWidth;
     //  console.log(left, top, height, width,x,y);
-    if (x > left && x < left + width) {
-      if (y < top + height) {
+    if (x + 100 > sword.left && x + 100 < sword.left + sword.width) {
+      if (y < sword.top + sword.height) {
         return true;
       }
     }
@@ -158,6 +174,7 @@ function whichGround(x, y, height) {
         ground[screenNumber - 1][i].left + ground[screenNumber - 1][i].width &&
       y < ground[screenNumber - 1][i].top + ground[screenNumber - 1][i].height
     ) {
+      console.log(i);
       return i;
     }
   }
