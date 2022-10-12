@@ -11,7 +11,7 @@ backgrounds.push(new Image());
 backgrounds.push(new Image());
 backgrounds[0].src = "Backgrounds/1.png";
 backgrounds[1].src = "Backgrounds/2.png";
-backgrounds[2].src = "Backgrounds/3.png";
+backgrounds[2].src = "Backgrounds/4.png";
 let playerImage = new Image();
 playerImage.src = "Player/spritesheet.png";
 let playerImagef = new Image();
@@ -141,78 +141,30 @@ function animate() {
     );
   }
 
-  //enemy
-  animateEnemy();
+	  //enemy
+	  animateEnemy();
+	
+	  if(enemyOnScreen[screenNumber-1].ishere && !enemyOnScreen[screenNumber-1].isAttacking && !enemyOnScreen[screenNumber-1].isDirectionRight){
+		  ctx.drawImage(enemyImage, 0, 0, 66, 85, enemyOnScreen[screenNumber-1].x, enemyOnScreen[screenNumber-1].y-100, 100, 100);
+	  }
+	  else if(enemyOnScreen[screenNumber-1].ishere && enemyOnScreen[screenNumber-1].isAttacking && !enemyOnScreen[screenNumber-1].isDirectionRight){
+		  ctx.drawImage(enemyImage, enemyX, enemyY, 146, 76, enemyOnScreen[screenNumber-1].x - 121, enemyOnScreen[screenNumber-1].y - 100, 221, 100 );
+	  }
+	  else if(enemyOnScreen[screenNumber-1].ishere && !enemyOnScreen[screenNumber-1].isAttacking && enemyOnScreen[screenNumber-1].isDirectionRight){
+		  ctx.drawImage(enemyImagef, 1934, 0, 66, 85, enemyOnScreen[screenNumber-1].x, enemyOnScreen[screenNumber-1].y-100, 100, 100);
+	  }
+	  else if(enemyOnScreen[screenNumber-1].ishere && enemyOnScreen[screenNumber-1].isAttacking && enemyOnScreen[screenNumber-1].isDirectionRight){
+		  ctx.drawImage(enemyImagef, enemyX, enemyY, 146, 76, enemyOnScreen[screenNumber-1].x - 121, enemyOnScreen[screenNumber-1].y - 100, 221, 100 );
+	  }
+  // } 
 
-  if (
-    enemyOnScreen[screenNumber - 1].ishere &&
-    !enemyOnScreen[screenNumber - 1].isAttacking &&
-    !enemyOnScreen[screenNumber - 1].isDirectionRight
-  ) {
-    ctx.drawImage(
-      enemyImage,
-      0,
-      0,
-      66,
-      85,
-      enemyOnScreen[screenNumber - 1].x,
-      enemyOnScreen[screenNumber - 1].y - 100,
-      100,
-      100
-    );
-  } else if (
-    enemyOnScreen[screenNumber - 1].ishere &&
-    enemyOnScreen[screenNumber - 1].isAttacking &&
-    !enemyOnScreen[screenNumber - 1].isDirectionRight
-  ) {
-    ctx.drawImage(
-      enemyImage,
-      enemyX,
-      enemyY,
-      146,
-      76,
-      enemyOnScreen[screenNumber - 1].x - 121,
-      enemyOnScreen[screenNumber - 1].y - 100,
-      221,
-      100
-    );
-  } else if (
-    enemyOnScreen[screenNumber - 1].ishere &&
-    !enemyOnScreen[screenNumber - 1].isAttacking &&
-    enemyOnScreen[screenNumber - 1].isDirectionRight
-  ) {
-    ctx.drawImage(
-      enemyImagef,
-      1934,
-      0,
-      66,
-      85,
-      enemyOnScreen[screenNumber - 1].x,
-      enemyOnScreen[screenNumber - 1].y - 100,
-      100,
-      100
-    );
-  } else if (
-    enemyOnScreen[screenNumber - 1].ishere &&
-    enemyOnScreen[screenNumber - 1].isAttacking &&
-    enemyOnScreen[screenNumber - 1].isDirectionRight
-  ) {
-    ctx.drawImage(
-      enemyImagef,
-      enemyX,
-      enemyY,
-      146,
-      76,
-      enemyOnScreen[screenNumber - 1].x - 121,
-      enemyOnScreen[screenNumber - 1].y - 100,
-      221,
-      100
-    );
-  }
+  
 
   if (!player.haveSword && screenNumber == 1) {
     ctx.drawImage(swordImage, 0, 0, 250, 1093, sword.left, sword.top, 18, 80);
   }
+
+  ctx.drawImage(backgrounds[screenNumber - 1], 0, 0, canvasWidth, canvasHeight);
 
   checkScreen();
   requestAnimationFrame(animate);
@@ -224,9 +176,6 @@ let staggerFrames = { attack: 0, run: 0, climb: 0, enemyAttack: 0 };
 //63
 
 function animatePlayer() {
-  // if (player.health <= 0) {
-  // 	return;
-  // }
 
   if (player_bools.left && !player_bools.isHitting && !player.isClimbing) {
     playerY = 85;
@@ -364,6 +313,7 @@ function animateEnemy() {
           enemyAttackEnd = false;
           enemyAttackStart = false;
           enemyOnScreen[screenNumber - 1].isAttacking = false;
+          enemy.x -= 121;
         }
         if (enemyAttackStart) {
           enemyX = 1854 - Math.floor(staggerFrames.enemyAttack++ / 7) * 146;
