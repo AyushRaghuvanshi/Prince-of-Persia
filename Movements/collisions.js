@@ -9,12 +9,7 @@ climableArea = [
     },
   ],
   [],
-  [{
-    left: 0.192 * canvasWidth,
-    top: 0.705 * canvasHeight,
-    height: 0.27 * canvasHeight,
-    width: 0.3 * canvasWidth,
-  }]
+  [],
 ];
 props = [
   [
@@ -25,14 +20,8 @@ props = [
       width: 0.1 * canvasWidth,
     },
   ],
-  [
-    {
-
-    }
-  ],
-  [
-    
-  ]
+  [{}],
+  [],
 ];
 ground = [
   [
@@ -100,7 +89,7 @@ ground = [
     //   height: 0.208 * canvasHeight,
     //   width: 0.582 * canvasWidth,
     // }
-  ]
+  ],
 ];
 
 // for (let i = 0; i < ground[screenNumber - 1].length; i++) {
@@ -112,7 +101,7 @@ ground = [
 //   x.style.position = "absolute";
 //   x.style.backgroundColor = "pink";
 //   x.style.opacity = "0.5";
-//   let y = document.getElementsByTagName("div")[0];
+//   let y = document.getElementsByClassName("d")[0];
 //   y.appendChild(x);
 // }
 

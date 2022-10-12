@@ -44,7 +44,7 @@ document.addEventListener("keydown", (event) => {
     !player.isClimbing
   ) {
     run.play();
-    
+
     player_bools.left = true;
     player_bools.isDirectionRight = false;
     player_bools.right = false;
@@ -124,6 +124,7 @@ function movements() {
       player.height,
       player.width
     );
+    console.log(climb, player.x, player.y);
     if (climb !== false) {
       // player.y = climb;
       upflag = false;
@@ -141,7 +142,7 @@ function movements() {
       player.isClimbing = true;
       playerClimbY = 30;
       player.y = climb;
-      // player.x += 10;
+      player.x += 20;
     } else if (upflag) {
       // player.isClimbing = false;
       velocity = -10;
@@ -170,6 +171,9 @@ function hit() {
 function checkScreen() {
   if (player.x + player.width >= canvasWidth && screenNumber <= ground.length) {
     screenNumber++;
+    if (screenNumber == 4) {
+      screenNumber--;
+    }
     added = false;
     if (enemyOnScreen[screenNumber - 1].ishere == true) {
       enemy_creation(

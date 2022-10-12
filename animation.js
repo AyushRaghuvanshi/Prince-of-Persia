@@ -41,6 +41,7 @@ swordImage.src = "Player/sword.png";
 function animate() {
   ctx.clearRect(0, 0, canvasWidth, canvasHeight);
   animatePlayer();
+  ctx.drawImage(backgrounds[screenNumber - 1], 0, 0, canvasWidth, canvasHeight);
 
   
   // if(Math.floor(player.health)!=0){
