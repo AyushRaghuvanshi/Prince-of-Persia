@@ -1,6 +1,7 @@
 // const canvas = document.getElementsByTagName("canvas")[0];
 // const canvasWidth = canvas.offsetWidth;
 // const canvasHeight = canvas.offsetHeight;
+let run = new Audio("../audio/run.mp3");
 
 let player = {
   x: 550,
@@ -31,11 +32,13 @@ let playerSpeed = 3;
 
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft" && !player_bools.isHitting && !player.isClimbing) {
+    run.play();
     player_bools.left = true;
     player_bools.isDirectionRight = false;
     player_bools.right = false;
   }
   if (event.key === "ArrowRight" && !player_bools.isHitting && !player.isClimbing) {
+    run.play();
     player_bools.right = true;
     player_bools.isDirectionRight = true;
     player_bools.left = false;
@@ -59,9 +62,11 @@ document.addEventListener("keydown", (event) => {
 
 document.addEventListener("keyup", (event) => {
   if (event.key === "ArrowLeft") {
+    run.pause();
     player_bools.left = false;
   }
   if (event.key === "ArrowRight") {
+    run.pause();
     player_bools.right = false;
   }
   if (event.key === "ArrowUp" && !player.isClimbing) {
@@ -69,6 +74,7 @@ document.addEventListener("keyup", (event) => {
   }
 });
 function movements() {
+  sword();
   if (checkProp(player.x, player.y)) {
     player.haveSword = true;
   }
@@ -101,13 +107,13 @@ function movements() {
     );
     if (climb !== false) {
       // player.y = climb;
-      upflag=false;
+      upflag = false;
       setTimeout(() => {
         movePlayerToRoof = false;
         player.isClimbing = false;
         player_bools.climb1 = false;
         player_bools.up = false;
-        upflag=true;
+        upflag = true;
       }, 2000);
       player_bools.isDirectionRight = true;
       if (!player.isClimbing) {
@@ -145,6 +151,7 @@ function hit() {
 function checkScreen() {
   if (player.x + player.width >= canvasWidth && screenNumber <= ground.length) {
     screenNumber++;
+    added = false;
     if (enemyOnScreen[screenNumber - 1].ishere == true) {
       enemy_creation(
         enemyOnScreen[screenNumber - 1].x,
@@ -157,6 +164,7 @@ function checkScreen() {
     player.x = 5;
   } else if (player.x <= 0 && screenNumber > 1) {
     screenNumber--;
+    added = false;
     if (enemyOnScreen[screenNumber - 1].ishere == true) {
       enemy_creation(
         enemyOnScreen[screenNumber - 1].x,
@@ -170,5 +178,6 @@ function checkScreen() {
   }
 }
 function playerDead() {
+  player.haveSword = false;
   console.log("dead");
 }

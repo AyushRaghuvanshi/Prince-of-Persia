@@ -1,7 +1,10 @@
 const canvas = document.getElementsByTagName("canvas")[0];
 const canvasWidth = canvas.offsetWidth;
 const canvasHeight = canvas.offsetHeight;
-
+let healthbar = document.getElementsByTagName("div")[0];
+healthbar.style.width = 0.2 * canvasWidth + "px";
+let healthbar_width = healthbar.style.width;
+console.log(healthbar_width);
 let enemyOnScreen = [
   {
     ishere: false,
@@ -63,6 +66,10 @@ class enemy {
 
   attack() {
     player.health -= 10;
+    let step = parseInt(healthbar_width) / 9;
+    console.log(healthbar.style.width - step);
+    healthbar.style.width =
+      parseFloat(healthbar.style.width) * (player.health / 100) + "px";
     enemyAttackStart = true;
     enemyOnScreen[screenNumber - 1].isAttacking = true;
     attackflag = true;

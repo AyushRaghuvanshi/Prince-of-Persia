@@ -35,8 +35,8 @@ swordImage.src = "Player/sword.png";
 
 
 function animate() {
-	ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-	animatePlayer();
+  ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+  animatePlayer();
 
 	if (player_bools.isDirectionRight && !player_bools.isHitting && !player.isClimbing) {
 		ctx.drawImage(playerImagef, playerX, playerY, 66, 85, player.x, player.y - player.height, 100, 100);
@@ -88,15 +88,13 @@ function animate() {
 
 let atFloor = false;
 
-let staggerFrames = { attack: 0, run: 0, climb: 0, enemyAttack: 0};
+let staggerFrames = { attack: 0, run: 0, climb: 0, enemyAttack: 0 };
 //63
 
-
-
 function animatePlayer() {
-	// if (player.health <= 0) {
-	// 	return;
-	// }
+  // if (player.health <= 0) {
+  // 	return;
+  // }
 
 	if (player_bools.left && !player_bools.isHitting && !player.isClimbing) {
 		playerY = 85;
@@ -133,23 +131,26 @@ function animatePlayer() {
 		}
 		playerY = 173;
 
-		if (staggerFrames.attack == 21) {
-			player_bools.hittingEnd = true;
-			player_bools.hittingStart = false;
-			staggerFrames.attack = 14;
-		}
-	} 
-	else if (player_bools.isDirectionRight && player_bools.isHitting && !player.isClimbing) {
-		if (staggerFrames.attack == 0 && player_bools.hittingEnd) {
-			player_bools.hittingEnd = false;
-			player_bools.isHitting = false;
-		}
-		if (player_bools.hittingStart) {
-			playerX = 1854 - Math.floor(staggerFrames.attack++ / 7) * 146;
-		} else {
-			playerX = 1854 - Math.floor(staggerFrames.attack-- / 7) * 146;
-		}
-		playerY = 173;
+    if (staggerFrames.attack == 21) {
+      player_bools.hittingEnd = true;
+      player_bools.hittingStart = false;
+      staggerFrames.attack = 14;
+    }
+  } else if (
+    player_bools.isDirectionRight &&
+    player_bools.isHitting &&
+    !player.isClimbing
+  ) {
+    if (staggerFrames.attack == 0 && player_bools.hittingEnd) {
+      player_bools.hittingEnd = false;
+      player_bools.isHitting = false;
+    }
+    if (player_bools.hittingStart) {
+      playerX = 1854 - Math.floor(staggerFrames.attack++ / 7) * 146;
+    } else {
+      playerX = 1854 - Math.floor(staggerFrames.attack-- / 7) * 146;
+    }
+    playerY = 173;
 
 		if (staggerFrames.attack == 21) {
 			player_bools.hittingEnd = true;
@@ -183,60 +184,56 @@ function animatePlayer() {
 	}
 }
 
+function animateEnemy() {
+  if (enemyOnScreen[screenNumber - 1].ishere) {
+    if (!enemyOnScreen[screenNumber - 1].isDirectionRight) {
+      if (enemyOnScreen[screenNumber - 1].isAttacking) {
+        if (staggerFrames.enemyAttack == 0 && enemyAttackEnd) {
+          enemyAttackEnd = false;
+          enemyAttackStart = false;
+          enemyOnScreen[screenNumber - 1].isAttacking = false;
+        }
+        if (enemyAttackStart) {
+          enemyX = Math.floor(staggerFrames.enemyAttack++ / 7) * 146;
+        } else {
+          enemyX = Math.floor(staggerFrames.enemyAttack-- / 7) * 146;
+        }
+        enemyY = 173;
 
-function animateEnemy(){
-	if(enemyOnScreen[screenNumber-1].ishere){
-		if(!enemyOnScreen[screenNumber-1].isDirectionRight){
-			if(enemyOnScreen[screenNumber-1].isAttacking){
-				if (staggerFrames.enemyAttack == 0 && enemyAttackEnd) {
-					enemyAttackEnd = false;
-					enemyAttackStart = false;
-					enemyOnScreen[screenNumber-1].isAttacking = false;
-				}
-				if (enemyAttackStart) {
-					enemyX = Math.floor(staggerFrames.enemyAttack++ / 7) * 146;
-				} else {
-					enemyX = Math.floor(staggerFrames.enemyAttack-- / 7) * 146;
-				}
-				enemyY = 173;
-	
-				if (staggerFrames.enemyAttack == 21) {
-					enemyAttackEnd = true;
-					enemyAttackStart = false;
-					staggerFrames.enemyAttack = 14;
-				}
-			}
-			else{
-				enemyX = 0;
-				enemyY = 0;
-			}
-		}
-		else{
-			if(enemyOnScreen[screenNumber-1].isAttacking){
-				if (staggerFrames.enemyAttack == 0 && enemyAttackEnd) {
-					enemyAttackEnd = false;
-					enemyAttackStart = false;
-					enemyOnScreen[screenNumber-1].isAttacking = false;
-				}
-				if (enemyAttackStart) {
-					enemyX = 1854 - Math.floor(staggerFrames.enemyAttack++ / 7) * 146;
-				} else {
-					enemyX = 1854 - Math.floor(staggerFrames.enemyAttack-- / 7) * 146;
-				}
-				enemyY = 173;
-	
-				if (staggerFrames.enemyAttack == 21) {
-					enemyAttackEnd = true;
-					enemyAttackStart = false;
-					staggerFrames.enemyAttack = 14;
-				}
-			}
-			else{
-				enemyX = 0;
-				enemyY = 0;
-			}
-		}
-	}
+        if (staggerFrames.enemyAttack == 21) {
+          enemyAttackEnd = true;
+          enemyAttackStart = false;
+          staggerFrames.enemyAttack = 14;
+        }
+      } else {
+        enemyX = 0;
+        enemyY = 0;
+      }
+    } else {
+      if (enemyOnScreen[screenNumber - 1].isAttacking) {
+        if (staggerFrames.enemyAttack == 0 && enemyAttackEnd) {
+          enemyAttackEnd = false;
+          enemyAttackStart = false;
+          enemyOnScreen[screenNumber - 1].isAttacking = false;
+        }
+        if (enemyAttackStart) {
+          enemyX = 1854 - Math.floor(staggerFrames.enemyAttack++ / 7) * 146;
+        } else {
+          enemyX = 1854 - Math.floor(staggerFrames.enemyAttack-- / 7) * 146;
+        }
+        enemyY = 173;
+
+        if (staggerFrames.enemyAttack == 21) {
+          enemyAttackEnd = true;
+          enemyAttackStart = false;
+          staggerFrames.enemyAttack = 14;
+        }
+      } else {
+        enemyX = 0;
+        enemyY = 0;
+      }
+    }
+  }
 }
 
 animate();
