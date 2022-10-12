@@ -2,9 +2,15 @@
 // const canvasWidth = canvas.offsetWidth;
 // const canvasHeight = canvas.offsetHeight;
 let run = new Audio("../audio/run.mp3");
-
+let audiom = new Audio("../UI/intro.mp3");
+let pickup = new Audio("../audio/pickup.mp3");
+let slash = new Audio("../audio/slash.mp3");
+audiom.autoplay = true;
+audiom.play();
+audiom.loop = true;
+audiom.volume = 0.2;
 let player = {
-  x: 550,
+  x: 100,
   y: 0,
   health: 100,
   height: 100,
@@ -29,15 +35,23 @@ let gravity = setInterval(movements, 10);
 let velocity = 0;
 let playerSpeed = 3;
 
-
 document.addEventListener("keydown", (event) => {
-  if (event.key === "ArrowLeft" && !player_bools.isHitting && !player.isClimbing) {
+  if (
+    event.key === "ArrowLeft" &&
+    !player_bools.isHitting &&
+    !player.isClimbing
+  ) {
     run.play();
+    
     player_bools.left = true;
     player_bools.isDirectionRight = false;
     player_bools.right = false;
   }
-  if (event.key === "ArrowRight" && !player_bools.isHitting && !player.isClimbing) {
+  if (
+    event.key === "ArrowRight" &&
+    !player_bools.isHitting &&
+    !player.isClimbing
+  ) {
     run.play();
     player_bools.right = true;
     player_bools.isDirectionRight = true;
@@ -48,12 +62,13 @@ document.addEventListener("keydown", (event) => {
   }
   if (event.key === "f" && !player_bools.isHitting) {
     if (player.haveSword) {
+      slash.play();
       player_bools.isHitting = true;
       player_bools.left = false;
       player_bools.right = false;
       player_bools.hittingStart = true;
-      if(!player_bools.isDirectionRight){
-      player.x -= 121;
+      if (!player_bools.isDirectionRight) {
+        player.x -= 121;
       }
       hit();
     }
@@ -74,8 +89,10 @@ document.addEventListener("keyup", (event) => {
   }
 });
 function movements() {
-  sword();
   if (checkProp(player.x, player.y)) {
+    if (!player.haveSword) {
+      pickup.play();
+    }
     player.haveSword = true;
   }
   if (player.health <= 0) {
