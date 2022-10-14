@@ -2,7 +2,7 @@ climableArea = [
   [
     {
       destination: 0.325 * canvasHeight,
-      left: 0.335 * canvasWidth,
+      left: 0.323 * canvasWidth,
       top: 0.33 * canvasHeight,
       height: 0.27 * canvasHeight,
       width: 0.015 * canvasWidth,

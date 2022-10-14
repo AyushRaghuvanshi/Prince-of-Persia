@@ -183,6 +183,7 @@ function animatePlayer() {
   ) {
     playerY = 252;
     playerX = 1950 - Math.floor(staggerFrames.climb++ / 4) * 50;
+    // player.x += 0.4;
     // player.y -= 10;
     if (staggerFrames.climb >= 32) {
       playerClimbY -= 2;
@@ -191,6 +192,7 @@ function animatePlayer() {
       staggerFrames.climb = 0;
       player_bools.climb1 = false;
       player_bools.climb2 = true;
+      player.x += 30;
     }
   } else if (
     player_bools.isDirectionRight &&

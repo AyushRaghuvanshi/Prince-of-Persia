@@ -133,6 +133,7 @@ function movements() {
         player.isClimbing = false;
         player_bools.climb1 = false;
         player_bools.up = false;
+        // player.x += 20;
         upflag = true;
       }, 2000);
       player_bools.isDirectionRight = true;
@@ -142,7 +143,7 @@ function movements() {
       player.isClimbing = true;
       playerClimbY = 30;
       player.y = climb;
-      player.x += 20;
+      // player.x += 30;
     } else if (upflag) {
       // player.isClimbing = false;
       velocity = -10;

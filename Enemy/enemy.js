@@ -1,10 +1,7 @@
 const canvas = document.getElementsByTagName("canvas")[0];
 const canvasWidth = canvas.offsetWidth;
 const canvasHeight = canvas.offsetHeight;
-// let healthbar = document.getElementsByTagName("div")[0];
-// healthbar.style.width = 0.2 * canvasWidth + "px";
-// let healthbar_width = healthbar.style.width;
-// console.log(healthbar_width);
+let healthBar = document.getElementById("health-bar");
 let enemyOnScreen = [
   {
     ishere: false,
@@ -54,8 +51,9 @@ class enemy {
     if (Math.abs(this.x - player.x) <= 180) {
       enemyOnScreen[screenNumber - 1].isAttacking = true;
       enemyAttackStart = true;
-      player.health -= 2;
       slashEnemy.play();
+      player.health -= 2;
+      healthBar.value = player.health;
       // if(enemy.isDirectionRight){
       //   enemy.x += 121;
       // }
@@ -69,6 +67,9 @@ class enemy {
 
   attack() {
     
+    
+    // healthBarWidth -= healthStep;
+    // healthBar.style.width = healthBarWidth;
     // let step = parseInt(healthbar_width) / 15;
     // console.log(healthbar.style.width - step);
     // healthbar.style.width =

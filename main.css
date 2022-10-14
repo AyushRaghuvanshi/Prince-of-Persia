@@ -14,6 +14,13 @@ canvas {
   height: 100%;
   background-color: black;
 }
-div {
- 
+
+
+#health-bar{
+  position: absolute;
+  width: 20%;
+  height: 40px;
+  accent-color: red;
+  top: 10px;
+  left: 10px;
 }
