@@ -16,6 +16,10 @@ let playerImage = new Image();
 playerImage.src = "Player/spritesheet.png";
 let playerImagef = new Image();
 playerImagef.src = "Player/spritesheetf.png";
+let progressBarEmpty = new Image();
+let progressBarFull = new Image();
+progressBarEmpty.src = "UI/progress-bar-base.png";
+progressBarFull.src = "UI/progress-bar-full.png";
 let x = 0;
 let playerX;
 let playerY;
@@ -82,16 +86,19 @@ function animate() {
 	  else if(enemyOnScreen[screenNumber-1].ishere && enemyOnScreen[screenNumber-1].isAttacking && enemyOnScreen[screenNumber-1].isDirectionRight){
 		  ctx.drawImage(enemyImagef, enemyX, enemyY, 146, 76, enemyOnScreen[screenNumber-1].x, enemyOnScreen[screenNumber-1].y - 100, 221, 100 );
 	  }
-  // } 
-
   
+
+  ctx.drawImage(backgrounds[screenNumber - 1], 0, 0, canvasWidth, canvasHeight);
+  if(enemyOnScreen[screenNumber-1].ishere){
+    ctx.drawImage(progressBarEmpty, 0, 0, 1500, 100, enemyOnScreen[screenNumber-1].x - 25, enemyOnScreen[screenNumber-1].y-150, 150, 10);
+    ctx.drawImage(progressBarFull, 0, 0, enemyOnScreen[screenNumber-1].health*15, 100, enemyOnScreen[screenNumber-1].x - 25, enemyOnScreen[screenNumber-1].y - 150, enemyOnScreen[screenNumber-1].health*1.5, 10);
+  }
 
   if (!player.haveSword && screenNumber == 1) {
     ctx.drawImage(swordImage, 0, 0, 250, 1093, sword.left, sword.top, 18, 80);
   }
 
-  ctx.drawImage(backgrounds[screenNumber - 1], 0, 0, canvasWidth, canvasHeight);
-
+  
   checkScreen();
   requestAnimationFrame(animate);
 }

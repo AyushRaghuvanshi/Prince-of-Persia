@@ -2,6 +2,7 @@ const canvas = document.getElementsByTagName("canvas")[0];
 const canvasWidth = canvas.offsetWidth;
 const canvasHeight = canvas.offsetHeight;
 let healthBar = document.getElementById("health-bar");
+
 let enemyOnScreen = [
   {
     ishere: false,
