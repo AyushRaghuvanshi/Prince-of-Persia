@@ -18,8 +18,9 @@ let player = {
   width: 100,
   haveSword: false,
   isClimbing: false,
-  isDead : false
+  isDead: false,
 };
+let healthBar = document.getElementById("health-bar");
 let player_bools = {
   left: false,
   right: false,
@@ -41,7 +42,8 @@ document.addEventListener("keydown", (event) => {
   if (
     event.key === "ArrowLeft" &&
     !player_bools.isHitting &&
-    !player.isClimbing
+    !player.isClimbing &&
+    !player.isDead
   ) {
     run.play();
 
@@ -52,17 +54,18 @@ document.addEventListener("keydown", (event) => {
   if (
     event.key === "ArrowRight" &&
     !player_bools.isHitting &&
-    !player.isClimbing
+    !player.isClimbing &&
+    !player.isDead
   ) {
     run.play();
     player_bools.right = true;
     player_bools.isDirectionRight = true;
     player_bools.left = false;
   }
-  if (event.key === "ArrowUp" && !player_bools.isHitting) {
+  if (event.key === "ArrowUp" && !player_bools.isHitting && !player.isDead) {
     player_bools.up = true;
   }
-  if (event.key === "f" && !player_bools.isHitting) {
+  if (event.key === "f" && !player_bools.isHitting && !player.isDead) {
     if (player.haveSword) {
       slashPlayer.play();
       player_bools.isHitting = true;
@@ -124,7 +127,7 @@ function movements() {
       player.height,
       player.width
     );
-    console.log(climb, player.x, player.y);
+
     if (climb !== false) {
       // player.y = climb;
       upflag = false;
@@ -172,6 +175,9 @@ function hit() {
 function checkScreen() {
   if (player.x + player.width >= canvasWidth && screenNumber <= ground.length) {
     screenNumber++;
+    if (screenNumber == 4 && enemies_died == 2) {
+      window.location.assign("win.html");
+    }
     if (screenNumber == 4) {
       screenNumber--;
     }
@@ -204,4 +210,5 @@ function checkScreen() {
 function playerDead() {
   player.haveSword = false;
   player.isDead = true;
+  window.location.assign("../dead_screen/dead.html");
 }

@@ -1,7 +1,7 @@
 const canvas = document.getElementsByTagName("canvas")[0];
 const canvasWidth = canvas.offsetWidth;
 const canvasHeight = canvas.offsetHeight;
-let healthBar = document.getElementById("health-bar");
+let enemies_died = 0;
 let enemyOnScreen = [
   {
     ishere: false,
@@ -21,7 +21,7 @@ let enemyOnScreen = [
     health: 100,
     isAttacking: false,
     isDirectionRight: false,
-  }
+  },
 ];
 
 let enemyAttackStart = false;
@@ -35,7 +35,6 @@ class enemy {
   }
   get wherePlayer() {
     if (Math.abs(this.y - player.y) <= 5) {
-     
       if (this.x > player.x) {
         enemyOnScreen[screenNumber - 1].isDirectionRight = false;
         return "left";
@@ -48,12 +47,11 @@ class enemy {
     }
   }
   get inProximity() {
-    if (Math.abs(this.x - player.x) <= 180) {
+    if (Math.abs(this.x - player.x) <= 180 && !player.isDead) {
       enemyOnScreen[screenNumber - 1].isAttacking = true;
       enemyAttackStart = true;
       slashEnemy.play();
-      player.health -= 2;
-      healthBar.value = player.health;
+
       // if(enemy.isDirectionRight){
       //   enemy.x += 121;
       // }
@@ -66,8 +64,8 @@ class enemy {
   }
 
   attack() {
-    
-    
+    player.health -= 10;
+    healthBar.value = player.health;
     // healthBarWidth -= healthStep;
     // healthBar.style.width = healthBarWidth;
     // let step = parseInt(healthbar_width) / 15;
@@ -97,13 +95,16 @@ function clearAnimation() {
   }
 }
 function enemyController() {
-  console.log(enemy1.wherePlayer);
+  enemy1.wherePlayer;
   let attackid = null;
   if (enemy1.health <= 0) {
     enemyOnScreen[screenNumber - 1].ishere = false;
+    enemies_died++;
+    if (attackid) {
+      clearTimeout(attackid);
+    }
     clearInterval(id);
   }
-
   if (enemy1.inProximity && attackflag && player.health > 0) {
     attackflag = false;
     attackid = setTimeout(enemy1.attack, 1000);

@@ -11,6 +11,10 @@ body {
   align-items: center;
   background-color: black;
 }
+h1{
+    color: #541a0f;
+    font-size: 50px;
+}
 
 img {
   width: 50vw;
