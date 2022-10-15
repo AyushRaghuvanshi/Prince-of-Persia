@@ -16,6 +16,10 @@ let playerImage = new Image();
 playerImage.src = "Player/spritesheet.png";
 let playerImagef = new Image();
 playerImagef.src = "Player/spritesheetf.png";
+let progressBarEmpty = new Image();
+let progressBarFull = new Image();
+progressBarEmpty.src = "UI/progress-bar-base.png";
+progressBarFull.src = "UI/progress-bar-full.png";
 let x = 0;
 let playerX;
 let playerY;
@@ -57,7 +61,7 @@ function animate() {
 		  ctx.drawImage(playerImagef, playerX, playerY, 146, 76, player.x, player.y - player.height, 221, 100);
 	  } 
 	  else if (!player_bools.isDirectionRight && player_bools.isHitting && !player.isClimbing) {
-		  ctx.drawImage(playerImage, playerX, playerY, 146, 76, player.x, player.y - player.height, 221, 100 );
+		  ctx.drawImage(playerImage, playerX, playerY, 146, 76, player.x - 121, player.y - player.height, 221, 100 );
 	  }
 	  else if(player_bools.isDirectionRight && player.isClimbing && player_bools.climb1){
 		  ctx.drawImage(playerImagef, playerX, playerY, 50, 113, player.x, player.y + playerClimbY, 76, 132);
@@ -82,16 +86,25 @@ function animate() {
 	  else if(enemyOnScreen[screenNumber-1].ishere && enemyOnScreen[screenNumber-1].isAttacking && enemyOnScreen[screenNumber-1].isDirectionRight){
 		  ctx.drawImage(enemyImagef, enemyX, enemyY, 146, 76, enemyOnScreen[screenNumber-1].x, enemyOnScreen[screenNumber-1].y - 100, 221, 100 );
 	  }
-  // } 
-
   
+
+  ctx.drawImage(backgrounds[screenNumber - 1], 0, 0, canvasWidth, canvasHeight);
+  if(enemyOnScreen[screenNumber-1].ishere){
+    ctx.drawImage(progressBarEmpty, 0, 0, 1500, 100, enemyOnScreen[screenNumber-1].x - 25, enemyOnScreen[screenNumber-1].y-150, 150, 10);
+    ctx.drawImage(progressBarFull, 0, 0, enemyOnScreen[screenNumber-1].health*15, 100, enemyOnScreen[screenNumber-1].x - 25, enemyOnScreen[screenNumber-1].y - 150, enemyOnScreen[screenNumber-1].health*1.5, 10);
+  }
 
   if (!player.haveSword && screenNumber == 1) {
     ctx.drawImage(swordImage, 0, 0, 250, 1093, sword.left, sword.top, 18, 80);
   }
 
-  ctx.drawImage(backgrounds[screenNumber - 1], 0, 0, canvasWidth, canvasHeight);
+  if(!enemyOnScreen[1].ishere && !enemyOnScreen[2].ishere){
+    ctx.font = "4rem serif";
+  ctx.fillStyle = "white";
+  ctx.fillText("You won", canvasWidth/2 - 100, 200);
+  }
 
+  console.log(player.y);
   checkScreen();
   requestAnimationFrame(animate);
 }
@@ -99,7 +112,7 @@ function animate() {
 let atFloor = false;
 
 let staggerFrames = { attack: 0, run: 0, climb: 0, enemyAttack: 0 };
-//63
+
 
 function animatePlayer() {
 
@@ -141,7 +154,7 @@ function animatePlayer() {
     if (staggerFrames.attack == 0 && player_bools.hittingEnd) {
       player_bools.hittingEnd = false;
       player_bools.isHitting = false;
-      player.x += 121;
+      // player.x += 121;
     }
     if (player_bools.hittingStart) {
       playerX = Math.floor(staggerFrames.attack++ / 7) * 146;
