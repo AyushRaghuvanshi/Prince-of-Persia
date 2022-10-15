@@ -166,7 +166,11 @@ function movements() {
   }
 }
 function hit() {
-  if (enemy1.inProximity) {
+  if (
+    enemy1.inProximity &&
+    !(enemy1.wherePlayer == "right" && player.isDirectionRight) &&
+    !(enemy1.wherePlayer == "left" && !player.isDirectionRight)
+  ) {
     enemyOnScreen[screenNumber - 1].health -= 10;
     enemy1.health -= 10;
   }
