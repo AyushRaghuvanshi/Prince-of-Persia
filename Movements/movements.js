@@ -129,20 +129,19 @@ function movements() {
       player.height,
       player.width
     );
-    
 
     if (climb !== false && !player_bools.right && !player_bools.left) {
       // player.y = climb;
       upflag = false;
       // setTimeout(() => {
-        player.isClimbing = false;
-        player_bools.climb1 = false;
-        player_bools.up = false;
-        // player.x += 20;
-        upflag = true;
+      player.isClimbing = false;
+      player_bools.climb1 = false;
+      player_bools.up = false;
+      // player.x += 20;
+      upflag = true;
       // }, 2000);
       player_bools.isDirectionRight = true;
-      if (!player.isClimbing ) {
+      if (!player.isClimbing) {
         player_bools.climb1 = true;
       }
       player.isClimbing = true;
@@ -170,8 +169,8 @@ function movements() {
 function hit() {
   if (
     enemy1.inProximity &&
-    !(enemy1.wherePlayer == "right" && player.isDirectionRight) &&
-    !(enemy1.wherePlayer == "left" && !player.isDirectionRight)
+    !(enemy1.wherePlayer == "right" && player_bools.isDirectionRight) &&
+    !(enemy1.wherePlayer == "left" && !player_bools.isDirectionRight)
   ) {
     enemyOnScreen[screenNumber - 1].health -= 10;
     enemy1.health -= 10;
