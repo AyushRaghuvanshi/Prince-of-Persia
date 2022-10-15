@@ -50,10 +50,9 @@ class enemy {
   }
   get inProximity() {
     if (Math.abs(this.x - player.x) <= 180 && !player.isDead) {
-      enemyOnScreen[screenNumber - 1].isAttacking = true;
-      enemyAttackStart = true;
-      slashEnemy.play();
-
+      // enemyOnScreen[screenNumber - 1].isAttacking = true;
+      // enemyAttackStart = true;
+      // slashEnemy.play();
       // if(enemy.isDirectionRight){
       //   enemy.x += 121;
       // }
@@ -66,8 +65,12 @@ class enemy {
   }
 
   attack() {
-    player.health -= 10;
+    enemyOnScreen[screenNumber - 1].isAttacking = true;
+      enemyAttackStart = true;
+      slashEnemy.play();
+    player.health -= 8;
     healthBar.value = player.health;
+    
     // healthBarWidth -= healthStep;
     // healthBar.style.width = healthBarWidth;
     // let step = parseInt(healthbar_width) / 15;
@@ -89,7 +92,7 @@ function enemy_creation(x, y, health) {
   if (id != null) {
     clearInterval(id);
   }
-  id = setInterval(enemyController, 1000);
+  id = setInterval(enemyController, 500);
 }
 function clearAnimation() {
   if (id != null) {
@@ -109,7 +112,7 @@ function enemyController() {
   }
   if (enemy1.inProximity && attackflag && player.health > 0) {
     attackflag = false;
-    attackid = setTimeout(enemy1.attack, 1000);
+    attackid = setTimeout(enemy1.attack, 500);
   } else {
     if (enemy1.inProximity != true) attackflag = true;
     if (attackid) {

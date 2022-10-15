@@ -20,7 +20,7 @@ let player = {
   isClimbing: false,
   isDead: false,
 };
-let healthBar = document.getElementById("health-bar");
+
 let player_bools = {
   left: false,
   right: false,
@@ -72,9 +72,9 @@ document.addEventListener("keydown", (event) => {
       player_bools.left = false;
       player_bools.right = false;
       player_bools.hittingStart = true;
-      if (!player_bools.isDirectionRight) {
-        player.x -= 121;
-      }
+      // if (!player_bools.isDirectionRight) {
+      //   player.x -= 121;
+      // }
       hit();
     }
   }
@@ -84,10 +84,12 @@ document.addEventListener("keyup", (event) => {
   if (event.key === "ArrowLeft") {
     run.pause();
     player_bools.left = false;
+    staggerFrames.run = 0;
   }
   if (event.key === "ArrowRight") {
     run.pause();
     player_bools.right = false;
+    staggerFrames.run = 0;
   }
   if (event.key === "ArrowUp" && !player.isClimbing) {
     player_bools.up = false;
@@ -127,20 +129,20 @@ function movements() {
       player.height,
       player.width
     );
+    
 
-    if (climb !== false) {
+    if (climb !== false && !player_bools.right && !player_bools.left) {
       // player.y = climb;
       upflag = false;
-      setTimeout(() => {
-        movePlayerToRoof = false;
+      // setTimeout(() => {
         player.isClimbing = false;
         player_bools.climb1 = false;
         player_bools.up = false;
         // player.x += 20;
         upflag = true;
-      }, 2000);
+      // }, 2000);
       player_bools.isDirectionRight = true;
-      if (!player.isClimbing) {
+      if (!player.isClimbing ) {
         player_bools.climb1 = true;
       }
       player.isClimbing = true;
@@ -210,5 +212,5 @@ function checkScreen() {
 function playerDead() {
   player.haveSword = false;
   player.isDead = true;
-  window.location.assign("../dead_screen/dead.html");
+  window.location.assign("./dead_screen/dead.html");
 }
