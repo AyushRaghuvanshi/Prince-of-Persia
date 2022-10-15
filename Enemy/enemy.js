@@ -66,11 +66,11 @@ class enemy {
 
   attack() {
     enemyOnScreen[screenNumber - 1].isAttacking = true;
-      enemyAttackStart = true;
-      slashEnemy.play();
-    player.health -= 8;
+    enemyAttackStart = true;
+    slashEnemy.play();
+    player.health -= 7;
     healthBar.value = player.health;
-    
+
     // healthBarWidth -= healthStep;
     // healthBar.style.width = healthBarWidth;
     // let step = parseInt(healthbar_width) / 15;
